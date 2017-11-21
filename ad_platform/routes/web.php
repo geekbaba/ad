@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['middleware' => 'web'], function ($router) {
+    $router->get('/click', ['uses' => 'ClickController@index']);
+    
+});
