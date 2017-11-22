@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use App\Libraries\LoogerWriter\LoggerWriter;
 
 class ClickController extends BaseController
 {
@@ -51,7 +51,7 @@ class ClickController extends BaseController
         //human_time:time:AD_SHOW:AD_ID:ip:UA:Cookie:Referer:pos
         //
         
-        $log = $datetime.self::$sp
+        $log_string = $datetime.self::$sp
         .$request_time_float.self::$sp
         .$log_type.self::$sp
         .$ad_id.self::$sp
@@ -61,7 +61,8 @@ class ClickController extends BaseController
         .$http_referer.self::$sp
         .$pos.self::$sp;
         
-        Log::info($log);
+        LoggerWriter::write($log_string);
+        
     }
     
     function get_ip(){
