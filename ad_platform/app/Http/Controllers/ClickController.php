@@ -16,7 +16,8 @@ class ClickController extends BaseController
     
     public function index(Request $request){
         
-        self::$sp = chr(1);
+        self::$sp = chr(1).chr(2);
+        
         $log_type = 'CLICK';
         $pos  = '120,213';//展示没有pos click有
         
