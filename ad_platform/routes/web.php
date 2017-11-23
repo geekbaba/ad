@@ -18,4 +18,7 @@ Route::get('/', function () {
 Route::group(['middleware' => 'web'], function ($router) {
     $router->get('/click', ['uses' => 'ClickController@index']);
     
+    $router->get('/gad', ['uses' => 'RequestController@selectAd']);
+    
+    
 });
