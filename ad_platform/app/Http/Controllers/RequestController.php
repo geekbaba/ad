@@ -7,13 +7,14 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
-use App\Traits\RequestPretreatment;
-class ClickController extends BaseController
+use App\Libraries\LoogerWriter\LoggerWriter;
+
+class RequestController extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests ,RequestPretreatment;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
-    public function index(Request $request){
-        $this->make($request);
+    public function selectAd(){
+        
     }
     
 }
