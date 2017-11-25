@@ -11,14 +11,27 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+Route::get('/',['uses' => 'HomeController@index']);
+
+Route::get('/login',  ['uses' => 'LoginController@index']);
+
+Route::get('/gad', ['uses' => 'RequestController@selectAd']);
 
 Route::group(['middleware' => 'web'], function ($router) {
     $router->get('/click', ['uses' => 'ClickController@index']);
+    $router->post('/login/post', ['uses' => 'LoginController@postLogin']);
     
-    $router->get('/gad', ['uses' => 'RequestController@selectAd']);
+    $router->group(['prefix'=>'ad'],function($router){
+        $router->get('/list', ['as' => 'ad/list','uses' => 'AdController@adList']);
+        $router->get('/create', ['uses' => 'AdController@create']);
+        $router->post('/store', ['as' => 'ad/store','uses' => 'AdController@store']);
+        
+    });
+    
     
     
 });
