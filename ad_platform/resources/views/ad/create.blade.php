@@ -29,6 +29,7 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        
                                         <div class="form-group row">
                                             <label class="col-md-3 form-control-label" for="textarea-input">广告属性</label>
                                             <div class="col-md-9">
@@ -61,6 +62,8 @@
 @stop
 @section('js')
 <script type="text/javascript">
+var ad_templates_json = '{{$ad_templates_json}}';
+
 $('#save').click(function(){
 var formElement = document.getElementById("ad_form");
 

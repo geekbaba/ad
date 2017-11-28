@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c03ef46ecb6c34c65d47a6618006409c",
+    "content-hash": "200c4b132dc23d7239659c1f5959bc44",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -910,6 +910,46 @@
                 "php"
             ],
             "time": "2017-11-04T11:48:34+00:00"
+        },
+        {
+            "name": "paillechat/php-enum",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paillechat/php-enum.git",
+                "reference": "84d668fd56204cdc3836a2b2e02cdc2db543dcc5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/paillechat/php-enum/84d668fd56204cdc3836a2b2e02cdc2db543dcc5.zip",
+                "reference": "84d668fd56204cdc3836a2b2e02cdc2db543dcc5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0",
+                "squizlabs/php_codesniffer": "^2.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Paillechat\\Enum\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Ilya Burtsev",
+                    "email": "paillechat@gmail.com"
+                }
+            ],
+            "description": "Enum implementation for PHP 7",
+            "keywords": [
+                "enum"
+            ],
+            "time": "2017-04-07T09:09:25+00:00"
         },
         {
             "name": "paragonie/random_compat",

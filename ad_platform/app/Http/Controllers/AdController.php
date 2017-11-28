@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Model\Advertising;
+use Illuminate\Support\Facades\Config;
 
 class AdController extends WithAuthController
 {
@@ -23,7 +24,9 @@ class AdController extends WithAuthController
     public function create(){
         $types = DB::table('ad_advertising_type')->where('status',1)->get();
         //advertising_creative_product_attribute
-        return view('ad/create', ['types' => $types]);
+        $ad_templates = Config::get('ad-template');
+        
+        return view('ad/create', ['types' => $types,'ad_templates_json'=>json_encode($ad_templates)]);
         
     }
     public function store(Request $request){
