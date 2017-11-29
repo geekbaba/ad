@@ -3,17 +3,19 @@
 use App\Enum\FrontWidgetType;
 
 return [
-    
-    '1' => [
+    /*广告类型*/
+    'x1' => [
         'FLOAT_ICON'=>[
             [
               'type'=>FrontWidgetType::IMAGE_FILE
-             ,'name'=>'image'
-             ,'maxSize'=>'2M'
+                ,'name'=>'image'
+                ,'display_name'=>'广告图片'
+                ,'maxSize'=>'2M'
             ]
             ,[
-              ,'type'=>FrontWidgetType::SELECT
-              ,'name'=>'width_height'
+                'type'=>FrontWidgetType::SELECT
+                ,'name'=>'width_height'
+                ,'display_name'=>'图片尺寸'
                 ,'options_data'=>'DATA'//API,DATA
               ,'options'=>[
                   '000000'=>'0x0'
@@ -23,10 +25,11 @@ return [
             ,[
                 'type'=>FrontWidgetType::TEXT
                 ,'name'=>'target_url'
+                ,'display_name'=>'目标地址'
                 ,'style'=>''
             ]
             
         ]
-    ],
+    ]
 
 ];

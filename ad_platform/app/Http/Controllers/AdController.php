@@ -25,7 +25,7 @@ class AdController extends WithAuthController
         $types = DB::table('ad_advertising_type')->where('status',1)->get();
         //advertising_creative_product_attribute
         $ad_templates = Config::get('ad-template');
-        
+        dump($ad_templates);
         return view('ad/create', ['types' => $types,'ad_templates_json'=>json_encode($ad_templates)]);
         
     }
