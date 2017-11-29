@@ -4,10 +4,10 @@ use App\Enum\FrontWidgetType;
 
 return [
     /*广告类型*/
-    'x1' => [
+    '1' => [
         'FLOAT_ICON'=>[
             [
-              'type'=>FrontWidgetType::IMAGE_FILE
+              'type'=>FrontWidgetType::FILE
                 ,'name'=>'image'
                 ,'display_name'=>'广告图片'
                 ,'maxSize'=>'2M'
