@@ -14,7 +14,8 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 form-control-label" for="text-input">广告名称</label>
                                             <div class="col-md-9">
-                                                <input type="text" id="text-input" name="advertising_name" class="form-control" placeholder="广告名称">
+                                                <input type="hidden" id="hidden-input" name="advertising_id" value="{{$advertising->advertising_id}}" />
+                                                <input type="text" id="text-input" name="advertising_name" class="form-control" value="{{$advertising->advertising_name}}" placeholder="广告名称"/>
                                                 <span class="help-block">起一个好的广告名称能让你很好的记住它。</span>
                                             </div>
                                         </div>
@@ -24,7 +25,7 @@
                                             <div class="col-md-9">
                                                 <select id="select" name="advertising_type_id" class="form-control">
                                                     @foreach ($types as $type)
-                                                    <option value="{{$type->advertising_type_id}}">{{$type->advertising_type_name}}</option>
+                                                    <option @if($type->advertising_type_id==$advertising->advertising_type_id) selected @endif value="{{$type->advertising_type_id}}">{{$type->advertising_type_name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -100,13 +101,11 @@ WidgetBuilder = (function() {
 	WidgetBuilder.prototype.textBuilder = function(item) {
 		
 		var html = [];
-		oThis.attribute = arguments[2]?arguments[2]:[];
-		
 		var value = oThis.attribute[item.name] ? oThis.attribute[item.name] : '';
 		html.push('<div class="form-group row '+ oThis.widgetStyleClass +'">');
 		html.push('<label class="col-md-3 form-control-label" for="text_'+ item.name +'">'+ item.display_name +'</label>');
 		html.push('<div class="col-md-9">');
-		html.push('<input type="text" id="text_'+ item.name +'" name="'+ oThis.namePrefix +'['+ item.name +']" value='+value+' />');
+		html.push('<input type="text" id="text_'+ item.name +'" name="'+ oThis.namePrefix +'['+ item.name +']" value="'+value+'" />');
 		html.push('</div>');
 		html.push('</div>');
 		return html;
@@ -165,12 +164,22 @@ WidgetBuilder = (function() {
 	WidgetBuilder.prototype.fileBuilder = function(item) {
 		var value = oThis.attribute[item.name] ? oThis.attribute[item.name] : '';
 		var html = [];
-		html.push('<div class="form-group row '+ oThis.widgetStyleClass +'">');
-		html.push('<label class="col-md-3 form-control-label" for="file_'+ item.name +'">'+ item.display_name +'</label>');
-		html.push('<div class="col-md-9">');
-		html.push('<input type="file" id="file_'+ item.name +'" name="'+ oThis.namePrefix +'['+ item.name +']" />');
-		html.push('</div>');
-		html.push('</div>');
+		if(value!=''){
+			html.push('<div class="form-group row '+ oThis.widgetStyleClass +'">');
+			html.push('<label class="col-md-3 form-control-label" for="file_'+ item.name +'">'+ item.display_name +'</label>');
+			html.push('<div class="col-md-9">');
+			html.push('<img style="width:50px;height:50px;" id="file_'+ item.name +'" src="{!!get_attach_path("' + value + '")!!}" />');
+			html.push('</div>');
+			html.push('</div>');
+		}else{
+			html.push('<div class="form-group row '+ oThis.widgetStyleClass +'">');
+			html.push('<label class="col-md-3 form-control-label" for="file_'+ item.name +'">'+ item.display_name +'</label>');
+			html.push('<div class="col-md-9">');
+			html.push('<input type="file" id="file_'+ item.name +'" name="'+ oThis.namePrefix +'['+ item.name +']" />');
+			html.push('</div>');
+			html.push('</div>');
+		}
+		
 		return html;
 	};
 	
@@ -179,13 +188,18 @@ WidgetBuilder = (function() {
 </script>
 <script type="text/javascript">
 var ad_templates_json = {!! $ad_templates_json !!};
+@if($advertising->advertising_attribute!='')
+var attribute = {!! $advertising->advertising_attribute !!};
+@else
+var attribute = {};
+@endif
 items = ad_templates_json['1'].FLOAT_ICON;
 
 widgetBuilder.render(items,function(html){
 	console.log('finnal');
 	console.log(html);
 	$('#ad_form').append(html);
-});
+},attribute);
 $('#save').click(function(){
 var formElement = document.getElementById("ad_form");
 

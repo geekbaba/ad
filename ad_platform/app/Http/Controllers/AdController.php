@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Model\Advertising;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\UploadedFile;
+use App\Libraries\AttachInterface\AttachHelper;
 
 class AdController extends WithAuthController
 {
@@ -16,7 +18,19 @@ class AdController extends WithAuthController
     public function adList()
     {
         $ads = DB::table('ad_advertising')->leftJoin('ad_advertising_type','ad_advertising.advertising_type_id','=','ad_advertising_type.advertising_type_id')
-        ->paginate(2);
+        ->orderBy('ad_advertising.created_at')->select([
+            'ad_advertising.advertising_id'
+            ,'ad_advertising.advertising_name'
+            ,'ad_advertising.status'
+            ,'ad_advertising.creator'
+            ,'ad_advertising.modified_by'
+            ,'ad_advertising.created_at'
+            ,'ad_advertising.updated_at'
+            ,'ad_advertising.advertising_strategy'
+            ,'ad_advertising.advertising_attribute'
+            ,'ad_advertising.advertising_type_id'
+            ,'ad_advertising_type.advertising_type_name'
+        ])->paginate(5);
         //advertising_type_id
         return view('ad/list', ['ads' => $ads]);
         
@@ -26,9 +40,28 @@ class AdController extends WithAuthController
         $types = DB::table('ad_advertising_type')->where('status',1)->get();
         //advertising_creative_product_attribute
         $ad_templates = Config::get('ad-template');
-        return view('ad/create', ['types' => $types,'ad_templates_json'=>json_encode($ad_templates,JSON_UNESCAPED_SLASHES)]);
+        return view('ad/create', ['types' => $types,'ad_templates_json'=>json_encode($ad_templates)]);
         
     }
+    
+    public function edit($advertising_id){
+        
+        $types = DB::table('ad_advertising_type')->where('status',1)->get();
+        $AdvertisingModel = new Advertising();
+        $advertising = $AdvertisingModel->where('advertising_id',$advertising_id)->first();
+        
+        //$advertising->advertising_attribute;
+        
+        if($advertising->advertising_attribute!=''){
+            
+            $advertising_attribute = json_decode($advertising->advertising_attribute);
+            $advertising->advertising_attributeObject = $advertising_attribute;
+        }
+        
+        $ad_templates = Config::get('ad-template');
+        return view('ad/edit', ['types' => $types, 'advertising'=>$advertising,'ad_templates_json'=>json_encode($ad_templates)]);
+    }
+    
     public function store(Request $request){
         
         $all = $request->all();
@@ -46,9 +79,33 @@ class AdController extends WithAuthController
         
         
         //$data['advertising_attribute'] = $all['advertising_attribute'];
-        $data['attribute']['width_height'];
-        $data['attribute']['target_url'];
-        $data['attribute']['image'];
+        //$data['attribute']['width_height'];
+        //$data['attribute']['target_url'];
+        //$data['attribute']['image'];
+        $attribute = [];
+        //Log::info();
+        Log::info(print_r($all,true));
+        
+        foreach ($all['attribute'] as $key=>$value){
+            
+            if($value instanceof UploadedFile){
+                
+                if($value->isValid()) {
+                    $attach = AttachHelper::upload($value);
+                    $attribute[$key] = $attach->hash_key;
+                }else{
+                    $output = [
+                        'status'=>0
+                        ,'msg'=>'upload failed'
+                    ];
+                    return response()->json($output);
+                }
+            }else{
+                $attribute[$key] = $value;
+            }
+        }
+        
+        $data['advertising_attribute'] = json_encode($attribute);
         /**
          * [image] => Illuminate\Http\UploadedFile Object
                 (
@@ -65,13 +122,16 @@ class AdController extends WithAuthController
         
         $data['creator'] = $this->user->user_id;
         //print_r($all,true);
-        Log::info(print_r($all,true));
-        return response()->json($all);
+        //return response()->json($all);
         //资源处理到底是本地硬盘还是
         //dump($all);
         $AdvertisingModel = new Advertising();
-        
-        $result = $AdvertisingModel->create($data);
+        if(isset($all['advertising_id']) && $all['advertising_id']!=''){
+            
+            $result = $AdvertisingModel->where('advertising_id',$all['advertising_id'])->update($data);
+        }else{
+            $result = $AdvertisingModel->create($data);
+        }
         if($result){
             $output = [
                 'status'=>1

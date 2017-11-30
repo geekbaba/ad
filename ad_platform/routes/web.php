@@ -17,9 +17,10 @@
 
 Route::get('/',['uses' => 'HomeController@index']);
 
-Route::get('/login',  ['uses' => 'LoginController@index']);
+Route::get('/login',  ['uses' => 'LoginController@index'])->name('login');
 
 Route::get('/gad', ['uses' => 'RequestController@selectAd']);
+Route::get('/attach/{hash_key}', ['uses' => 'AttachController@attach']);
 
 Route::group(['middleware' => 'web'], function ($router) {
     $router->get('/click', ['uses' => 'ClickController@index']);
@@ -28,6 +29,7 @@ Route::group(['middleware' => 'web'], function ($router) {
     $router->group(['prefix'=>'ad'],function($router){
         $router->get('/list', ['as' => 'ad/list','uses' => 'AdController@adList']);
         $router->get('/create', ['uses' => 'AdController@create']);
+        $router->get('/edit/{advertising_id}', ['uses' => 'AdController@edit'])->where('advertising_id', '[0-9]+');
         $router->post('/store', ['as' => 'ad/store','uses' => 'AdController@store']);
         
     });

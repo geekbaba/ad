@@ -1,5 +1,7 @@
 <?php
 
+use App\Libraries\AttachInterface\AttachHelper;
+
 /**
  * 左边填充0的转换16进制方法
  */
@@ -28,5 +30,10 @@ if (! function_exists('get_ip')) {
         else
             $ip = "unknown";
         return($ip);
+    }
+}
+if (! function_exists('get_attach_path')) {
+    function get_attach_path($attach){
+        return AttachHelper::getNetPath($attach);
     }
 }

@@ -15,8 +15,9 @@
                                                 <th>广告编码</th>
                                                 <th>广告名称</th>
                                                 <th>广告类型</th>
+                                                <th>状态</th>
                                                 <th>创建时间</th>
-                                                <th>创建时间</th>
+                                                <th>操作</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -26,8 +27,9 @@
                                                 <td>{{ $ad->advertising_name }}</td>
                                                 <td>{{ $ad->advertising_type_name }}</td>
                                                 <td>{{ $ad->status }}</td>
+                                                <td>{!! $ad->created_at !!}</td>
                                                 <td>
-                                                    <span class="badge badge-success">{{ $ad->advertising_name }}</span>
+                                                    <a href="/ad/edit/{{$ad->advertising_id}}"><span class="badge badge-success">编辑</span></a>
                                                 </td>
                                             </tr>
                                         @endforeach

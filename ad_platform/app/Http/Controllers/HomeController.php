@@ -24,8 +24,6 @@ class HomeController extends WithAuthController
      */
     public function index()
     {
-        
         return view('dashboard/index');
-        
     }
 }

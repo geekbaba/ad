@@ -111,6 +111,18 @@
                         </ul>
                     </li>
                     <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i> 活动管理</a>
+                        <ul class="nav-dropdown-items">
+                        	<li class="nav-item">
+                                <a class="nav-link" href="/activity/create">&nbsp;&nbsp;&nbsp;<i class="icon-puzzle"></i> 创建活动</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/activity/list">&nbsp;&nbsp;&nbsp;<i class="icon-puzzle"></i> 活动列表</a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-dropdown">
                         <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Icons</a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
