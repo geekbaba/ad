@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.11)
 # Database: ad
-# Generation Time: 2017-11-28 15:29:53 +0000
+# Generation Time: 2017-11-30 16:10:03 +0000
 # ************************************************************
 
 
@@ -18,40 +18,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
-# Dump of table ad_advertising
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `ad_advertising`;
-
-CREATE TABLE `ad_advertising` (
-  `advertising_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '广告ID',
-  `advertising_name` varchar(20) NOT NULL DEFAULT '''''' COMMENT '广告名称',
-  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态字段',
-  `creator` int(11) DEFAULT '0' COMMENT '创建者ID',
-  `modified_by` int(11) DEFAULT '0' COMMENT '修改人',
-  `created_at` datetime DEFAULT NULL COMMENT '创建时间',
-  `updated_at` datetime DEFAULT NULL COMMENT '更新时间',
-  `deleted_at` datetime DEFAULT NULL COMMENT '删除时间',
-  `advertising_strategy` text COMMENT '广告策略',
-  `advertising_attribute` text COMMENT '广告属性',
-  `advertising_type_id` int(11) DEFAULT NULL COMMENT '广告类型',
-  PRIMARY KEY (`advertising_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-LOCK TABLES `ad_advertising` WRITE;
-/*!40000 ALTER TABLE `ad_advertising` DISABLE KEYS */;
-
-INSERT INTO `ad_advertising` (`advertising_id`, `advertising_name`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `advertising_strategy`, `advertising_attribute`, `advertising_type_id`)
-VALUES
-	(1,'广澳1',1,1,1,NULL,NULL,NULL,'{}',NULL,2),
-	(2,'大光一点',1,1,1,NULL,NULL,NULL,NULL,NULL,1),
-	(3,'小心一点',1,1,1,NULL,NULL,NULL,NULL,NULL,2),
-	(4,'WinerSwiget',0,1,0,'2017-11-25 17:10:32','2017-11-25 17:10:32',NULL,NULL,'A',1);
-
-/*!40000 ALTER TABLE `ad_advertising` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table ad_activity
@@ -65,9 +31,9 @@ CREATE TABLE `ad_activity` (
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态字段',
   `creator` int(11) DEFAULT '0' COMMENT '创建者ID',
   `modified_by` int(11) DEFAULT '0' COMMENT '修改人',
-  `created_at` datetime DEFAULT NULL COMMENT '创建时间',
-  `updated_at` datetime DEFAULT NULL COMMENT '更新时间',
-  `deleted_at` datetime DEFAULT NULL COMMENT '删除时间',
+  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
   `activity_strategy` text COMMENT '活动策略',
   `activity_attribute` text COMMENT '活动属性',
   PRIMARY KEY (`activity_id`)
@@ -86,14 +52,53 @@ CREATE TABLE `ad_activity_product` (
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态字段',
   `creator` int(11) DEFAULT '0' COMMENT '创建者ID',
   `modified_by` int(11) DEFAULT '0' COMMENT '修改人',
-  `created_at` datetime DEFAULT NULL COMMENT '创建时间',
-  `updated_at` datetime DEFAULT NULL COMMENT '更新时间',
-  `deleted_at` datetime DEFAULT NULL COMMENT '删除时间',
+  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
   `activity_product_strategy` text COMMENT '活动产品策略',
   `activity_product_attribute` text COMMENT '活动产品属性',
   PRIMARY KEY (`activity_product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
+# Dump of table ad_advertising
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `ad_advertising`;
+
+CREATE TABLE `ad_advertising` (
+  `advertising_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '广告ID',
+  `advertising_name` varchar(20) NOT NULL DEFAULT '''''' COMMENT '广告名称',
+  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态字段',
+  `creator` int(11) DEFAULT '0' COMMENT '创建者ID',
+  `modified_by` int(11) DEFAULT '0' COMMENT '修改人',
+  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
+  `advertising_strategy` text COMMENT '广告策略',
+  `advertising_attribute` text COMMENT '广告属性',
+  `advertising_type_id` int(11) DEFAULT NULL COMMENT '广告类型',
+  PRIMARY KEY (`advertising_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `ad_advertising` WRITE;
+/*!40000 ALTER TABLE `ad_advertising` DISABLE KEYS */;
+
+INSERT INTO `ad_advertising` (`advertising_id`, `advertising_name`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `advertising_strategy`, `advertising_attribute`, `advertising_type_id`)
+VALUES
+	(1,'广澳2',0,1,1,'2017-11-25 17:10:32','2017-11-30 16:06:22',NULL,'{}','{\"width_height\":\"0F00F0\",\"target_url\":\"asd\"}',2),
+	(2,'大光一点',1,1,1,'2017-11-21 19:10:32',NULL,NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":\"[Attach]:28c8edde3d61a0411511d3b1866f0636\"}',1),
+	(3,'小心一点',1,1,1,'2017-11-25 17:10:32',NULL,NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":\"[Attach]:28c8edde3d61a0411511d3b1866f0636\"}',2),
+	(4,'WinerSwiget',0,1,0,'2017-11-25 19:10:32','2017-11-25 17:10:32',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":\"[Attach]:28c8edde3d61a0411511d3b1866f0636\"}',1),
+	(5,'TT',0,1,0,'2017-11-30 14:27:17','2017-11-30 14:27:17',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"http:\\/\\/ada.sp\",\"image\":{}}',1),
+	(6,'asdas',0,1,0,'2017-11-30 14:30:21','2017-11-30 14:30:21',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asda\",\"image\":{}}',1),
+	(7,'asdas',0,1,0,'2017-11-30 14:31:04','2017-11-30 14:31:04',NULL,NULL,'{\"width_height\":\"000000\",\"target_url\":\"asdsa\",\"image\":{}}',2),
+	(8,'asd',0,1,0,'2017-11-30 14:33:07','2017-11-30 14:33:07',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":{}}',2),
+	(9,'asd',0,1,0,'2017-11-30 14:50:16','2017-11-30 14:50:16',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":\"[Attach]:28c8edde3d61a0411511d3b1866f0636\"}',1);
+
+/*!40000 ALTER TABLE `ad_advertising` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table ad_advertising_type
@@ -107,9 +112,9 @@ CREATE TABLE `ad_advertising_type` (
   `advertising_type_status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态字段',
   `creator` int(11) DEFAULT '0' COMMENT '创建者ID',
   `modified_by` int(11) DEFAULT '0' COMMENT '修改人',
-  `created_at` datetime DEFAULT NULL COMMENT '创建时间',
-  `updated_at` datetime DEFAULT NULL COMMENT '更新时间',
-  `deleted_at` datetime DEFAULT NULL COMMENT '删除时间',
+  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
   `status` tinyint(2) DEFAULT '0' COMMENT '广告类型状态',
   PRIMARY KEY (`advertising_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -127,6 +132,40 @@ VALUES
 UNLOCK TABLES;
 
 
+# Dump of table ad_attach
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `ad_attach`;
+
+CREATE TABLE `ad_attach` (
+  `attach_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '附件ID',
+  `attach_mime_type` varchar(20) NOT NULL DEFAULT '''''' COMMENT '资源类型',
+  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态字段',
+  `creator` int(11) DEFAULT '0' COMMENT '创建者ID',
+  `modified_by` int(11) DEFAULT '0' COMMENT '修改人',
+  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
+  `attach_relative_src` varchar(500) DEFAULT '' COMMENT '附件路径',
+  `attach_info` varchar(1000) DEFAULT '' COMMENT '附件属性',
+  `attach_host` varchar(100) DEFAULT NULL COMMENT '附件主机',
+  `attach_api` varchar(20) DEFAULT NULL COMMENT '附件访问接口',
+  `hash_key` char(32) DEFAULT NULL COMMENT '附件hashkey',
+  PRIMARY KEY (`attach_id`),
+  KEY `hash_key` (`hash_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `ad_attach` WRITE;
+/*!40000 ALTER TABLE `ad_attach` DISABLE KEYS */;
+
+INSERT INTO `ad_attach` (`attach_id`, `attach_mime_type`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `attach_relative_src`, `attach_info`, `attach_host`, `attach_api`, `hash_key`)
+VALUES
+	(1,'image/jpeg',1,1,0,'2017-11-30 14:50:16','2017-11-30 14:50:16',NULL,'storage/uploads/171130025016ad.jpeg','','','file_storage','28c8edde3d61a0411511d3b1866f0636');
+
+/*!40000 ALTER TABLE `ad_attach` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 # Dump of table media
 # ------------------------------------------------------------
 
@@ -138,9 +177,9 @@ CREATE TABLE `media` (
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态字段',
   `creator` int(11) DEFAULT '0' COMMENT '创建者ID',
   `modified_by` int(11) DEFAULT '0' COMMENT '修改人',
-  `created_at` datetime DEFAULT NULL COMMENT '创建时间',
-  `updated_at` datetime DEFAULT NULL COMMENT '更新时间',
-  `deleted_at` datetime DEFAULT NULL COMMENT '删除时间',
+  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`media_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -157,9 +196,9 @@ CREATE TABLE `media_advertising_space` (
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态字段',
   `creator` int(11) DEFAULT '0' COMMENT '创建者ID',
   `modified_by` int(11) DEFAULT '0' COMMENT '修改人',
-  `created_at` datetime DEFAULT NULL COMMENT '创建时间',
-  `updated_at` datetime DEFAULT NULL COMMENT '更新时间',
-  `deleted_at` datetime DEFAULT NULL COMMENT '删除时间',
+  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
   `advertising_space_strategy` text COMMENT '广告位策略',
   `advertising_space_attribute` text COMMENT '广告位属性',
   `advertising_space_type_id` int(11) DEFAULT NULL COMMENT '广告位类型',
@@ -181,9 +220,9 @@ CREATE TABLE `media_advertising_space_type` (
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态字段',
   `creator` int(11) DEFAULT '0' COMMENT '创建者ID',
   `modified_by` int(11) DEFAULT '0' COMMENT '修改人',
-  `created_at` datetime DEFAULT NULL COMMENT '创建时间',
-  `updated_at` datetime DEFAULT NULL COMMENT '更新时间',
-  `deleted_at` datetime DEFAULT NULL COMMENT '删除时间',
+  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`advertising_space_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -200,9 +239,9 @@ CREATE TABLE `media_type` (
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态字段',
   `creator` int(11) DEFAULT '0' COMMENT '创建者ID',
   `modified_by` int(11) DEFAULT '0' COMMENT '修改人',
-  `created_at` datetime DEFAULT NULL COMMENT '创建时间',
-  `updated_at` datetime DEFAULT NULL COMMENT '更新时间',
-  `deleted_at` datetime DEFAULT NULL COMMENT '删除时间',
+  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`media_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
