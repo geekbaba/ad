@@ -73,7 +73,7 @@ class AdController extends WithAuthController
         
         $data['advertising_name'] = $all['advertising_name'];
         
-        $data['status'] = isset($all['status']) ?? '';
+        $data['status'] = isset($all['status']) ? $all['status'] : '1';
         
         $data['advertising_type_id'] = $all['advertising_type_id'];
         
@@ -120,16 +120,19 @@ class AdController extends WithAuthController
                 )
          */
         
-        $data['creator'] = $this->user->user_id;
         //print_r($all,true);
         //return response()->json($all);
         //资源处理到底是本地硬盘还是
         //dump($all);
         $AdvertisingModel = new Advertising();
         if(isset($all['advertising_id']) && $all['advertising_id']!=''){
+            $data['modified_by'] = $this->user->user_id;
             
             $result = $AdvertisingModel->where('advertising_id',$all['advertising_id'])->update($data);
         }else{
+            
+            $data['creator'] = $this->user->user_id;
+            
             $result = $AdvertisingModel->create($data);
         }
         if($result){

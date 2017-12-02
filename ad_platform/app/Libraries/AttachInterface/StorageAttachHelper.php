@@ -21,7 +21,7 @@ class StorageAttachHelper extends Attach{
          
          $clientName = $resource->getClientOriginalName();    //客户端文件名称..
          $tmpName = $resource->getFileName();                 //缓存在tmp文件夹中的文件名
-         $realPath = $resource->getRealPath();                  //这个表示的是缓存在tmp文件夹下的文件的绝对路径
+         $realPath = $resource->getRealPath();                //这个表示的是缓存在tmp文件夹下的文件的绝对路径
          
          $entension = $resource->getClientOriginalExtension();   //上传文件的后缀.
          //$mimeTye = $resource->getMimeType();                    //也就是该资源的媒体类型

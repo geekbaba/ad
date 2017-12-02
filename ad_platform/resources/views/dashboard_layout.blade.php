@@ -123,6 +123,28 @@
                         </ul>
                     </li>
                     <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>活动皮肤管理</a>
+                        <ul class="nav-dropdown-items">
+                        	<!-- <li class="nav-item">
+                                <a class="nav-link" href="/skin/create">&nbsp;&nbsp;&nbsp;<i class="icon-puzzle"></i> 创建皮肤</a>
+                            </li> -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="/skin/list">&nbsp;&nbsp;&nbsp;<i class="icon-puzzle"></i> 皮肤列表</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>产品管理</a>
+                        <ul class="nav-dropdown-items">
+                        	<li class="nav-item">
+                                <a class="nav-link" href="/product/create">&nbsp;&nbsp;&nbsp;<i class="icon-puzzle"></i> 产品添加</a>
+                            </li> <!-- -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="/product/list">&nbsp;&nbsp;&nbsp;<i class="icon-puzzle"></i> 产品列表</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-dropdown">
                         <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Icons</a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
