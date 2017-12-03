@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>{{$title}}}</title>
+    <title>{{$title}}</title>
 
     <link href="{{asset('activity/0001/css/index.css')}}" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="{{asset('activity/0001/js/jquery-1.10.2.js')}}"></script>
@@ -89,12 +89,12 @@
                 <div class="back"></div>
                 <div class="body">
                     <!--奖品图片-->
-                    <img src="" alt="">
+                    <img  src="" alt="">
                 </div>
                 <div class="front">
                     <p class="p1">恭喜获得</p>
-                    <p class="prize">888</p>
-                    <a href="#" class="btn">立即领取</a>
+                    <p class="prize"></p>
+                    <a id="get_now" href="#" class="btn">立即领取</a>
                 </div>
             </div>
         </div>

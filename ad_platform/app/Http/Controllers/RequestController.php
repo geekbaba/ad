@@ -10,14 +10,14 @@ use App\Traits\RequestPretreatment;
 use App\Libraries\AdRender\Render;
 use \App\Libraries\ActivityRender\Render as ActivityRender;
 use App\Model\Activity;
+use Illuminate\Support\Facades\Cookie;
+use App\Model\CookiesMap;
 
 class RequestController extends Controller
 {
     use RequestPretreatment;
     
     public function selectAd(Request $request,$slot){
-        
-        
         
         Selector::init();
         
@@ -40,15 +40,77 @@ class RequestController extends Controller
         $render = Render::render($ad);
         //render//$target_url
         
-        return response()->view($render['template'],$render['data']);
+        //$foreverCookie = Cookie::forever('forever', 'Success');
+        //$tempCookie = Cookie::make('temporary', 'My name is fantasy', 5);//参数格式：$name, $value, $minutes
+        //return Response::make()->withCookie($foreverCookie)->withCookie($tempCookie);
+        $log_type = 'QUERY_AD';
+        
+        $pos='0,0';
+        
+        //$hash_string = sprintf("");
+        $cookies = $request->cookie();
+        
+        if(isset($cookies['uuid'])){
+            $otherinfo = 'EXIST_COOKIE:'.$cookies['uuid'];
+            
+            $foreverCookie = Cookie::forever('uuid', $cookies['uuid']);
+            
+        }else{
+            
+            $CookiesMapModel = new CookiesMap();
+            
+            $cookies_string = $this->getCookiesString($request);
+            
+            $cookiemap = $CookiesMapModel->create([
+                'cookies_uuid'=>''
+                ,'status'=>1
+                ,'cookies'=>$cookies_string
+                ,'advertising_space_id'=>$attr['advertising_space_id']
+                ,'slot'=>$slot
+            ]);
+            $uuid = md5($cookiemap->cookies_map_id);
+            $cookiemap->cookies_uuid = $uuid;
+            $cookiemap->save();
+            
+            $otherinfo = 'CREATE_COOKIE:'.$uuid;
+            
+            $foreverCookie = Cookie::forever('uuid', $uuid);
+        }
+        $slotCookie = Cookie::forever('goojo_ad_slot', $slot);
+        
+        //
+        $this->make($request,$log_type,$ad->advertising_id,$slot,$pos,$otherinfo);
+        
+        return response()->view($render['template'],$render['data'])->cookie($slotCookie)->cookie($foreverCookie);
     }
     
     
-    public function showActivity($activity_id){
+    public function showActivity(Request $request,$activity_id){
+        
         $ActivityModel = new Activity();
         $activity = $ActivityModel->where('activity_id',$activity_id)->first();
         
         $render = ActivityRender::render($activity);
+        
+        $log_type = 'ACTIVITY_SHOW';
+        
+        $pos='0,0';
+        
+        //$hash_string = sprintf("");
+        $cookies = $request->cookie();
+        
+        if(isset($cookies['uuid'])){
+            $otherinfo = 'EXIST_COOKIE:'.$cookies['uuid'];
+            
+            $slot = Cookie::get('goojo_ad_slot');
+        }else{
+            //非正常请求
+            $otherinfo = 'no_info';
+            $slot = '';
+        }
+        
+        //
+        $this->make($request,$log_type,$activity_id,$slot,$pos,$otherinfo);
         
         return response()->view($render['template'],$render['data']);
         
@@ -75,6 +137,26 @@ class RequestController extends Controller
                    ,'msg'=>'success'
                    ,'data'=>$product
                 ];
+        $log_type = 'PRODUCT_SHOW';
+        
+        $pos='0,0';
+        
+        //$hash_string = sprintf("");
+        $cookies = $request->cookie();
+        
+        if(isset($cookies['uuid'])){
+            $otherinfo = 'EXIST_COOKIE:'.$cookies['uuid'];
+            $otherinfo .= ',activity_id:'.$activity_id;
+            $slot = Cookie::get('goojo_ad_slot');
+        }else{
+            //非正常请求
+            $otherinfo = 'no_info';
+            $slot = '';
+        }
+        
+        //
+        $this->make($request,$log_type,$product->activity_product_id ,$slot,$pos,$otherinfo);
+        
         return response()->json($output);
         
     }

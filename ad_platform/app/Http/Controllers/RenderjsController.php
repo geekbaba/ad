@@ -8,11 +8,16 @@ use App\Model\Activity;
 use Illuminate\Http\Request;
 use App\Model\ActivitySkin;
 use Illuminate\Support\Facades\DB;
+use App\Traits\RequestPretreatment;
 
 class RenderjsController extends Controller
 {
+    /**
+     * 广告位展示请求
+     */
+    use RequestPretreatment;
     
-    public function index($slot){
+    public function index(Request $request,$slot){
         
         //view('loader')->html
         //$content = file_get_contents();
@@ -32,7 +37,16 @@ class RenderjsController extends Controller
         $adspace['height'] = $data['height'];
         $adspace['ad_server'] = $ad_server;
         
-        return response()->view('loader',['ssl_analytics_server'=>$ssl_analytics_server,'analytics_server'=>$analytics_server,'adspace'=>json_encode($adspace)])->header('Content-Type', 'application/javascript');
+        $log_type = 'ADS_REQ';
+        
+        $pos='0,0';
+        //
+        //
+        $this->make($request,$log_type,$adspace['adsp_id'],$slot,$pos);
+        
+        return response()->view('loader',['ssl_analytics_server'=>$ssl_analytics_server,'analytics_server'=>$analytics_server,'adspace'=>json_encode($adspace)])
+        ->header('Content-Type', 'application/javascript');
+        
         //->cookie($name, $value, $minutes, $path, $domain, $secure, $httpOnly)
         //echo $content;die;
         

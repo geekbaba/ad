@@ -7,6 +7,7 @@ var turnplate={
     startAngle:0,				//开始角度
     bRotate:false				//false:停止;ture:旋转
 };
+
 $(document).ready(function(){
     //动态添加大转盘的奖品与奖品区域背景颜色
     turnplate.restaraunts = ["发发发", "八十八", "六百", "八十整", "非常遗憾", "大礼包"];
@@ -60,11 +61,12 @@ $(document).ready(function(){
             	            		$('.model_prize .body img').attr('src','/'+attribute.product_image);
             	            		
             	            		$('.model_prize .front .prize').html(result.data.activity_product_name);
-            	            		
+            	            		$('#get_now').attr('href',attribute.target_url);
                                     $('.model_prize .close').click(function(){
                                         $('.model_prize').hide();
                                     });
                                     $('.model_prize').show();
+                                    
             	            }else{
 
             	            }
