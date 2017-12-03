@@ -19,9 +19,14 @@ Route::get('/',['uses' => 'HomeController@index']);
 
 Route::get('/login',  ['uses' => 'LoginController@index'])->name('login');
 
-Route::get('/gad', ['uses' => 'RequestController@selectAd']);
+Route::get('/gad/{slot}', ['uses' => 'RequestController@selectAd']);
+Route::get('/p/{activity_id}/{slot?}', ['as' => 'p','uses' => 'RequestController@selectProduct'])->where('activity_id', '[0-9]+');
+Route::get('/activity/{activity_id}', ['uses' => 'RequestController@showActivity'])->where('activity_id', '[0-9]+');
+Route::get('/test', ['uses' => 'TestController@index']);
 Route::get('/attach/{hash_key}', ['uses' => 'AttachController@attach']);
 Route::get('/[Attach]:{hash_key}', ['uses' => 'AttachController@attach']);
+Route::get('/renderjs/{slot}', ['uses' => 'RenderjsController@index']);
+Route::get('/activityjs/{activity_id}/js', ['uses' => 'RenderjsController@activityJs'])->where('activity_id', '[0-9]+');
 
 Route::group(['middleware' => 'web'], function ($router) {
     $router->get('/click', ['uses' => 'ClickController@index']);
@@ -67,6 +72,17 @@ Route::group(['middleware' => 'web'], function ($router) {
         $router->get('/create', ['uses' => 'ActivityProductController@create']);
         $router->get('/edit/{activity_product_id}', ['uses' => 'ActivityProductController@edit'])->where('activity_product_id', '[0-9]+');
         $router->post('/store', ['as' => 'product/store','uses' => 'ActivityProductController@store']);
+        
+    });
+    
+    /**
+     * 广告位管理路由
+     */
+    $router->group(['prefix'=>'adspace'],function($router){
+        $router->get('/list', ['as' => 'adspace/list','uses' => 'MediaAdvertisingSpaceController@adSpaceList']);
+        $router->get('/create', ['uses' => 'MediaAdvertisingSpaceController@create']);
+        $router->get('/edit/{advertising_space_id}', ['uses' => 'MediaAdvertisingSpaceController@edit'])->where('advertising_space_id', '[0-9]+');
+        $router->post('/store', ['as' => 'adspace/store','uses' => 'MediaAdvertisingSpaceController@store']);
         
     });
         

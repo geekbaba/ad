@@ -6,7 +6,6 @@ use App\Enum\MIMEType;
 return [
         'name'=>"大转盘模板"
         ,'js'=>[
-            
         ]
         ,'htmls'=>[
             

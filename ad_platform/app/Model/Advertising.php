@@ -16,6 +16,7 @@ class Advertising extends CommonModel
         ,'advertising_strategy'
         ,'advertising_attribute'
         ,'advertising_type_id'
+        ,'width_height'
         ,'status'
     ];
     

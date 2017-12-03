@@ -14,8 +14,8 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 form-control-label" for="text-input">产品名称</label>
                                             <div class="col-md-9">
-                                                <input type="hidden" id="hidden-input" name="activity_product_id" value="{{$skin->activity_skin_id}}" />
-                                                <input type="text" id="text-input" name="activity_product_name" class="form-control" value="{{$skin->activity_skin_name}}" placeholder="产品名称"/>
+                                                <input type="hidden" id="hidden-input" name="activity_product_id" value="{{$product->activity_product_id}}" />
+                                                <input type="text" id="text-input" name="activity_product_name" class="form-control" value="{{$product->activity_product_name}}" placeholder="产品名称"/>
                                                 <span class="help-block">起一个好的名称能让你很好的记住它。</span>
                                             </div>
                                         </div>

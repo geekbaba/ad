@@ -28,6 +28,7 @@ class AdController extends WithAuthController
             ,'ad_advertising.updated_at'
             ,'ad_advertising.advertising_strategy'
             ,'ad_advertising.advertising_attribute'
+            ,'ad_advertising.width_height'
             ,'ad_advertising.advertising_type_id'
             ,'ad_advertising_type.advertising_type_name'
         ])->paginate(5);
@@ -101,6 +102,9 @@ class AdController extends WithAuthController
                     return response()->json($output);
                 }
             }else{
+                if(in_array($key, ['width_height'])){
+                    $data[$key] = $value;
+                }
                 $attribute[$key] = $value;
             }
         }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Enum\FrontWidgetType;
+use App\Enum\ADWidthHeight;
 
 return [
     /*广告类型*/
@@ -17,10 +18,7 @@ return [
                 ,'name'=>'width_height'
                 ,'display_name'=>'图片尺寸'
                 ,'options_data'=>'DATA'//API,DATA
-              ,'options'=>[
-                  '000000'=>'0x0'
-                  ,'0F00F0'=>'100x100'
-              ]
+                ,'options'=>ADWidthHeight::WH
             ]
             ,'target_url'=>[
                 'type'=>FrontWidgetType::TEXT

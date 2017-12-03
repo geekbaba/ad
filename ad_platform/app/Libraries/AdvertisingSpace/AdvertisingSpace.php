@@ -2,6 +2,8 @@
 namespace App\Libraries\AdvertisingSpace;
 
 
+use Illuminate\Support\Facades\Config;
+
 class AdvertisingSpace{
     
     protected static $code = [
@@ -12,7 +14,7 @@ class AdvertisingSpace{
     ];
     protected static $AdvertisingSpaceEntity = null;
     
-    public static function __construct(){
+    static function init(){
         self::$AdvertisingSpaceEntity = new MysqlAdvertisingSpace();
     }
     
@@ -22,32 +24,16 @@ class AdvertisingSpace{
     
     static function makeCode($advertising_space_id){
         
-        $attr = self::$AdvertisingSpaceEntity->getAttr($advertising_space_id);
+        $attr = self::$AdvertisingSpaceEntity::getAttr($advertising_space_id);
         /**
-        $attr['width'];
-        $attr['height'];
-        $attr['advertising_space_type_id'];
-        $attr['render_js'];
-        $attr['advertising_space_id'];
-        $attr['media_id'];
-        $attr['advertising_space_type_id'];
         */
-        $render_js = '';
+        $render_js = Config::get('renderjs.loader');
         //101 //PC
         //201 //移动端
 
         //
         
-        //FFF FFF FFF   -     FFFF - FFFFFFFF
-        //广告位类型 + 宽 + 高  - 媒体ID - 广告位ID
-        $goojoad_slot = sprintf('%s%s%s-%s-%s'
-            ,padzero_dechex($attr['advertising_space_type_id'], 3)
-            ,padzero_dechex($attr['width'], 3)
-            ,padzero_dechex($attr['height'], 3)
-            ,padzero_dechex($attr['media_id'], 4)
-            ,padzero_dechex($attr['advertising_space_id'], 8)
-            );
-        
+        $goojoad_slot = Slot::maker($attr['advertising_type_id'], $attr['width'], $attr['height'], $attr['media_id'], $attr['advertising_space_id']);
         $goojoad_ad_client = 'mb-c-02adf';
         
         $code_template = self::$code['default'];
@@ -55,7 +41,7 @@ class AdvertisingSpace{
         //goojoad-ad-client
         //goojoad-slot
         //8位
-        $code_template = str_replace_first('{render_js}', $render_js, $code_template);
+        $code_template = str_replace_first('{render_js}', $render_js.$goojoad_slot, $code_template);
         $code_template = str_replace_first('{width}', $attr['width'], $code_template);
         $code_template = str_replace_first('{height}', $attr['height'], $code_template);
         

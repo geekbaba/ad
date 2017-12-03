@@ -15,7 +15,15 @@ class FrontWidgetType extends Enum{
     // file
     const FILE = 0x4;
     
-    const IMAGE = 0x5;
     //image file
+    const IMAGE = 0x5;
+    
+    //
+    const DATE = 0x7;
+    
+    //
+    const DATETIME = 0x8;
+    //time
+    const TIME = 0x9;
     
 }

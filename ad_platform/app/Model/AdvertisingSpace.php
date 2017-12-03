@@ -16,7 +16,7 @@ class AdvertisingSpace extends CommonModel
         ,'modified_by'
         ,'advertising_space_strategy'
         ,'advertising_space_attribute'
-        ,'advertising_space_type_id'
+        ,'advertising_type_id'
         ,'media_id'
         ,'advertising_space_code'
         ,'status'

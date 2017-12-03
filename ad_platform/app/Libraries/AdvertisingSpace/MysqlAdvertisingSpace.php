@@ -14,12 +14,22 @@ class MysqlAdvertisingSpace extends AdvertisingSpaceInterface{
         
         $advertising_space_attribute = json_decode($advertising_space->advertising_space_attribute);
         
+        $width_height = $advertising_space_attribute->width_height;
+        
+        $hex_width = substr($width_height, 0,3);
+        
+        $hex_height = substr($width_height, -3);
+        
+        $width = $hex_width=='' ? 0 : hexdec($hex_width);
+        
+        $height = $hex_height=='' ? 0 : hexdec($hex_height);
+        
         return [
-            'width'=>$advertising_space_attribute->width
-            ,'height'=>$advertising_space_attribute->height
+            'width'=>$width
+            ,'height'=>$height
             ,'advertising_space_id'=>$advertising_space->advertising_space_id
             ,'media_id'=>$advertising_space->media_id
-            ,'advertising_space_type_id'=>$advertising_space->advertising_space_type_id
+            ,'advertising_type_id'=>$advertising_space->advertising_type_id
         ];
         
     }

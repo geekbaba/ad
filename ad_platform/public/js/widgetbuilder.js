@@ -38,11 +38,23 @@ WidgetBuilder = (function() {
 			case 0x5://file
 				html = oThis.imageBuilder(item);
 				break;
+			case 0x6://file
+				html = oThis.textAreaBuilder(item);
+				break;
+			case 0x7://file
+				html = oThis.dateBuilder(item);
+				break;
+			case 0x8://file
+				html = oThis.datetimeBuilder(item);
+				break;
+			case 0x9://file
+				html = oThis.timeBuilder(item);
+				break;
 				
 		}
 		oThis.htmls = oThis.htmls.concat(html);
 	};
-	
+
 	WidgetBuilder.prototype.textBuilder = function(item) {
 		
 		var html = [];
@@ -55,6 +67,60 @@ WidgetBuilder = (function() {
 		html.push('</div>');
 		return html;
 	};
+
+	WidgetBuilder.prototype.dateBuilder = function(item) {
+		
+		var html = [];
+		var value = oThis.attribute[item.name] ? oThis.attribute[item.name] : '';
+		html.push('<div class="form-group row '+ oThis.widgetStyleClass +'">');
+		html.push('<label class="col-md-3 form-control-label" for="date_'+ item.name +'">'+ item.display_name +'</label>');
+		html.push('<div class="col-md-9">');
+		html.push('<input type="text" id="date_'+ item.name +'" name="'+ oThis.namePrefix +'['+ item.name +']" value="'+value+'" />');
+		html.push('</div>');
+		html.push('</div>');
+		return html;
+	};
+	
+	WidgetBuilder.prototype.datetimeBuilder = function(item) {
+		
+		var html = [];
+		var value = oThis.attribute[item.name] ? oThis.attribute[item.name] : '';
+		html.push('<div class="form-group row '+ oThis.widgetStyleClass +'">');
+		html.push('<label class="col-md-3 form-control-label" for="datetime_'+ item.name +'">'+ item.display_name +'</label>');
+		html.push('<div class="col-md-9">');
+		html.push('<input type="text" id="datetime_'+ item.name +'" name="'+ oThis.namePrefix +'['+ item.name +']" value="'+value+'" />');
+		html.push('</div>');
+		html.push('</div>');
+		return html;
+	};
+	
+	WidgetBuilder.prototype.timeBuilder = function(item) {
+		
+		var html = [];
+		var value = oThis.attribute[item.name] ? oThis.attribute[item.name] : '';
+		html.push('<div class="form-group row '+ oThis.widgetStyleClass +'">');
+		html.push('<label class="col-md-3 form-control-label" for="time_'+ item.name +'">'+ item.display_name +'</label>');
+		html.push('<div class="col-md-9">');
+		html.push('<input type="text" id="time_'+ item.name +'" name="'+ oThis.namePrefix +'['+ item.name +']" value="'+value+'" />');
+		html.push('</div>');
+		html.push('</div>');
+		return html;
+	};
+	
+	WidgetBuilder.prototype.textAreaBuilder = function(item) {
+		
+		var html = [];
+		var value = oThis.attribute[item.name] ? oThis.attribute[item.name] : '';
+		html.push('<div class="form-group row '+ oThis.widgetStyleClass +'">');
+		html.push('<label class="col-md-3 form-control-label" for="textarea_'+ item.name +'">'+ item.display_name +'</label>');
+		html.push('<div class="col-md-9">');
+
+		html.push('<textarea id="textarea_'+ item.name +'"  name="'+ oThis.namePrefix +'['+ item.name +']"  rows="9" class="form-control"  placeholder="" >'+value+'</textarea>');
+		html.push('</div>');
+		html.push('</div>');
+		return html;
+	};
+	
 	
 	WidgetBuilder.prototype.clear = function() {
 

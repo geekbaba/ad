@@ -103,7 +103,7 @@
          * 全局工具对象实例。
          */
         ,$Global = new Global(_o_window, document)
-	,analytics_domain = "http:" == $Global[_str_document][_location][_protocol] ? "http://ssl.server.com/" : "http://www.server.com/"
+	,analytics_domain = "http:" == $Global[_str_document][_location][_protocol] ? "{{$ssl_analytics_server}}" : "{{$analytics_server}}"
         ,analytics_path = analytics_domain + "p/ga.gif";
 		
 		
@@ -255,12 +255,12 @@
 			var d = void 0 === d ? "" : d;
 			var iframeElement = ["<iframe"];
 			iframeElement.push("src = ");
-			iframeElement.push('"'+ ads.ad_server +'"');
-			iframeElement.push('style="' + ("left:0;position:absolute;top:0;border:none;width:" + width + "px;height:" + height + "px;") + '"');
+			iframeElement.push('"'+ ads.ad_server + slot +'"');
+			iframeElement.push('style="' + ("left:0;position:absolute;top:0;border:none;width:" + ads.width + "px;height:" + ads.height + "px;") + '"');
 			iframeElement.push("></iframe>");
-			a_id = ads.id;
-			height = "border:none;height:" + height + "px;margin:0;padding:0;position:relative;visibility:visible;width:" + width + "px;background-color:transparent;";
-			return ['<ins id="', a_id + "_expand", '" style="display:inline-table;', height, void 0 === d ? "" : d, '"><ins id="', a_id + "_anchor", '" style="display:block;', height, '">', iframeElement.join(" "), "</ins></ins>"].join("")
+			adsp_id = ads.adsp_id;
+			height = "border:none;height:" + ads.height + "px;margin:0;padding:0;position:relative;visibility:visible;width:" + ads.width + "px;background-color:transparent;";
+			return ['<ins id="', adsp_id + "_expand", '" style="display:inline-table;', ads.height, void 0 === d ? "" : d, '"><ins id="', adsp_id + "_anchor", '" style="display:block;', ads.height, '">', iframeElement.join(" "), "</ins></ins>"].join("")
 	};
 
 
@@ -280,12 +280,10 @@
 	
 	console.log(elm);
 
-	var ad_server = "http://127.0.0.1:3000/ads.html";//广告服务器地址
-
 	slot = elm[0].getAttribute('goojoad-slot');
 	ad_client = elm[0].getAttribute('goojoad-ad-client');
 	
-	text = getCode({"id":"10e1"},30,30);
+	text = getCode({!!$adspace!!},slot,ad_client);
 	fullDocument = _o_window[_str_document];
 	//	fullDocument.write(text);
 	console.log(text);

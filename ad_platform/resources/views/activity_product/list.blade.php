@@ -6,30 +6,28 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <i class="fa fa-align-justify"></i> 皮肤列表
+                                    <i class="fa fa-align-justify"></i> 产品列表
                                 </div>
                                 <div class="card-block">
                                     <table class="table table-bordered table-striped table-condensed">
                                         <thead>
                                             <tr>
-                                                <th>皮肤编号</th>
-                                                <th>皮肤名称</th>
-                                                <th>活动</th>
+                                                <th>产品编号</th>
+                                                <th>产品名称</th>
                                                 <th>状态</th>
                                                 <th>创建时间</th>
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach ($skins as $skin)
+                                        @foreach ($activity_products as $product)
                                         	<tr>
-                                                <td>{{ $skin->activity_skin_id }}</td>
-                                                <td>{{ $skin->activity_skin_name }}</td>
-                                                <td>{{ $activityIdMap[$skin->activity_id]->activity_name }}</td>
-                                                <td>{{ $skin->status }}</td>
-                                                <td>{!! $skin->created_at !!}</td>
+                                                <td>{{ $product->activity_product_id }}</td>
+                                                <td>{{ $product->activity_product_name }}</td>
+                                                <td>{{ $product->status }}</td>
+                                                <td>{!! $product->created_at !!}</td>
                                                 <td>
-                                                    <a href="/skin/edit/{{$skin->activity_skin_id}}"><span class="badge badge-success">编辑</span></a>
+                                                    <a href="/product/edit/{{$product->activity_product_id}}"><span class="badge badge-success">编辑</span></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -37,7 +35,7 @@
                                         </tbody>
                                     </table>
                                     <nav>
-                                        {{ $skins->links() }}
+                                        {{ $activity_products->links() }}
                                     </nav>
                                 </div>
                             </div>

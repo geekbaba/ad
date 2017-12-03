@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Model\Activity;
-use App\Model\ActivitySkin;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Http\UploadedFile;
 use App\Libraries\AttachInterface\AttachHelper;
@@ -23,7 +21,6 @@ class ActivityProductController extends WithAuthController
         return view('activity_product/list', ['activity_products' => $activity_products]);
         
     }
-    
     
     
     public function create(){
