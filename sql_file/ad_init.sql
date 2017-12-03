@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.11)
 # Database: ad
-# Generation Time: 2017-11-30 16:10:03 +0000
+# Generation Time: 2017-12-03 16:53:16 +0000
 # ************************************************************
 
 
@@ -36,9 +36,21 @@ CREATE TABLE `ad_activity` (
   `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
   `activity_strategy` text COMMENT '活动策略',
   `activity_attribute` text COMMENT '活动属性',
+  `skin_configure_code` char(4) DEFAULT NULL COMMENT '皮肤配置',
   PRIMARY KEY (`activity_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `ad_activity` WRITE;
+/*!40000 ALTER TABLE `ad_activity` DISABLE KEYS */;
+
+INSERT INTO `ad_activity` (`activity_id`, `activity_name`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `activity_strategy`, `activity_attribute`, `skin_configure_code`)
+VALUES
+	(1,'大转盘',1,1,1,'2017-12-02 08:04:01','2017-12-02 08:09:05',NULL,NULL,NULL,'0001'),
+	(2,'刮刮卡',1,1,0,'2017-12-02 08:06:20','2017-12-02 08:06:20',NULL,NULL,NULL,'0002'),
+	(3,'打地鼠',1,1,0,'2017-12-02 08:08:55','2017-12-02 08:08:55',NULL,NULL,NULL,'0003');
+
+/*!40000 ALTER TABLE `ad_activity` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table ad_activity_product
@@ -60,6 +72,48 @@ CREATE TABLE `ad_activity_product` (
   PRIMARY KEY (`activity_product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `ad_activity_product` WRITE;
+/*!40000 ALTER TABLE `ad_activity_product` DISABLE KEYS */;
+
+INSERT INTO `ad_activity_product` (`activity_product_id`, `activity_product_name`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `activity_product_strategy`, `activity_product_attribute`)
+VALUES
+	(1,'流量免费送',1,1,0,'2017-12-03 12:06:07','2017-12-03 12:06:07',NULL,NULL,'{\"description\":\"\\u6d41\\u91cf\\u514d\\u8d39\\u9001\",\"button_name\":\"\\u9886\\u53d6\\u514d\\u8d39\\u6d41\\u91cf\",\"target_url\":\"https:\\/\\/m.10010.com/bj/\",\"validity_date\":\"2017-12-30\",\"product_image\":\"[Attach]:4c0d13d3ad6cc317017872e51d01b238\",\"product_list_image\":\"[Attach]:8d8e353b98d5191d5ceea1aa3eb05d43\"}');
+
+/*!40000 ALTER TABLE `ad_activity_product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table ad_activity_skin
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `ad_activity_skin`;
+
+CREATE TABLE `ad_activity_skin` (
+  `activity_skin_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '活动皮肤ID',
+  `activity_skin_name` varchar(20) NOT NULL DEFAULT '''''' COMMENT '活动皮肤名称',
+  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '皮肤状态',
+  `creator` int(11) DEFAULT '0' COMMENT '创建者ID',
+  `modified_by` int(11) DEFAULT '0' COMMENT '修改人',
+  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
+  `activity_skin_strategy` text COMMENT '活动皮肤策略',
+  `activity_skin_attribute` text COMMENT '活动皮肤属性',
+  `activity_id` int(11) DEFAULT NULL COMMENT '活动ID',
+  PRIMARY KEY (`activity_skin_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `ad_activity_skin` WRITE;
+/*!40000 ALTER TABLE `ad_activity_skin` DISABLE KEYS */;
+
+INSERT INTO `ad_activity_skin` (`activity_skin_id`, `activity_skin_name`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `activity_skin_strategy`, `activity_skin_attribute`, `activity_id`)
+VALUES
+	(1,'电玩小王子',1,1,1,'2017-12-02 09:01:04','2017-12-02 09:01:16',NULL,NULL,NULL,1),
+	(2,'卡卡西',1,1,0,'2017-12-02 09:39:12','2017-12-02 09:39:12',NULL,NULL,NULL,2),
+	(3,'A',1,1,1,'2017-12-02 16:59:08','2017-12-02 17:03:23',NULL,NULL,'{\"main_background_image\":\"[Attach]:4e44f1ac85cd60e3caa56bfd4afb675e\",\"banner_image\":\"[Attach]:3d2f8900f2e49c02b481c2f717aa9020\",\"bg\":\"[Attach]:cd7fd1517e323f26c6f1b0b6b96e3b3d\"}',1);
+
+/*!40000 ALTER TABLE `ad_activity_skin` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table ad_advertising
@@ -79,23 +133,25 @@ CREATE TABLE `ad_advertising` (
   `advertising_strategy` text COMMENT '广告策略',
   `advertising_attribute` text COMMENT '广告属性',
   `advertising_type_id` int(11) DEFAULT NULL COMMENT '广告类型',
+  `width_height` char(6) DEFAULT NULL COMMENT '广告尺寸',
   PRIMARY KEY (`advertising_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `ad_advertising` WRITE;
 /*!40000 ALTER TABLE `ad_advertising` DISABLE KEYS */;
 
-INSERT INTO `ad_advertising` (`advertising_id`, `advertising_name`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `advertising_strategy`, `advertising_attribute`, `advertising_type_id`)
+INSERT INTO `ad_advertising` (`advertising_id`, `advertising_name`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `advertising_strategy`, `advertising_attribute`, `advertising_type_id`, `width_height`)
 VALUES
-	(1,'广澳2',0,1,1,'2017-11-25 17:10:32','2017-11-30 16:06:22',NULL,'{}','{\"width_height\":\"0F00F0\",\"target_url\":\"asd\"}',2),
-	(2,'大光一点',1,1,1,'2017-11-21 19:10:32',NULL,NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":\"[Attach]:28c8edde3d61a0411511d3b1866f0636\"}',1),
-	(3,'小心一点',1,1,1,'2017-11-25 17:10:32',NULL,NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":\"[Attach]:28c8edde3d61a0411511d3b1866f0636\"}',2),
-	(4,'WinerSwiget',0,1,0,'2017-11-25 19:10:32','2017-11-25 17:10:32',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":\"[Attach]:28c8edde3d61a0411511d3b1866f0636\"}',1),
-	(5,'TT',0,1,0,'2017-11-30 14:27:17','2017-11-30 14:27:17',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"http:\\/\\/ada.sp\",\"image\":{}}',1),
-	(6,'asdas',0,1,0,'2017-11-30 14:30:21','2017-11-30 14:30:21',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asda\",\"image\":{}}',1),
-	(7,'asdas',0,1,0,'2017-11-30 14:31:04','2017-11-30 14:31:04',NULL,NULL,'{\"width_height\":\"000000\",\"target_url\":\"asdsa\",\"image\":{}}',2),
-	(8,'asd',0,1,0,'2017-11-30 14:33:07','2017-11-30 14:33:07',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":{}}',2),
-	(9,'asd',0,1,0,'2017-11-30 14:50:16','2017-11-30 14:50:16',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":\"[Attach]:28c8edde3d61a0411511d3b1866f0636\"}',1);
+	(1,'广澳2',0,1,1,'2017-11-25 17:10:32','2017-11-30 16:06:22',NULL,'{}','{\"width_height\":\"0F00F0\",\"target_url\":\"asd\"}',2,NULL),
+	(2,'大光一点',1,1,1,'2017-11-21 19:10:32',NULL,NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":\"[Attach]:28c8edde3d61a0411511d3b1866f0636\"}',1,NULL),
+	(3,'小心一点',1,1,1,'2017-11-25 17:10:32',NULL,NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":\"[Attach]:28c8edde3d61a0411511d3b1866f0636\"}',2,NULL),
+	(4,'WinerSwiget',0,1,0,'2017-11-25 19:10:32','2017-11-25 17:10:32',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":\"[Attach]:28c8edde3d61a0411511d3b1866f0636\"}',1,NULL),
+	(5,'TT',1,1,1,'2017-11-30 14:27:17','2017-12-03 05:33:16',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"http:\\/\\/ada.sp\"}',1,'0F00F0'),
+	(6,'asdas',0,1,0,'2017-11-30 14:30:21','2017-11-30 14:30:21',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asda\",\"image\":{}}',1,NULL),
+	(7,'asdas',0,1,0,'2017-11-30 14:31:04','2017-11-30 14:31:04',NULL,NULL,'{\"width_height\":\"000000\",\"target_url\":\"asdsa\",\"image\":{}}',2,NULL),
+	(8,'asd',0,1,0,'2017-11-30 14:33:07','2017-11-30 14:33:07',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":{}}',2,NULL),
+	(9,'asd',0,1,0,'2017-11-30 14:50:16','2017-11-30 14:50:16',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":\"[Attach]:28c8edde3d61a0411511d3b1866f0636\"}',1,NULL),
+	(10,'预选广告',1,1,0,'2017-12-03 08:17:11','2017-12-03 08:17:11',NULL,NULL,'{\"width_height\":\"01E01E\",\"target_url\":\"http://192.168.1.101/activity/1\",\"image\":\"[Attach]:815e6212def15fe76ed27cec7a393d59\"}',2,'01E01E');
 
 /*!40000 ALTER TABLE `ad_advertising` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -109,24 +165,23 @@ DROP TABLE IF EXISTS `ad_advertising_type`;
 CREATE TABLE `ad_advertising_type` (
   `advertising_type_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '广告ID',
   `advertising_type_name` varchar(20) NOT NULL DEFAULT '''''' COMMENT '广告名称',
-  `advertising_type_status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态字段',
   `creator` int(11) DEFAULT '0' COMMENT '创建者ID',
   `modified_by` int(11) DEFAULT '0' COMMENT '修改人',
   `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
   `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
   `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
-  `status` tinyint(2) DEFAULT '0' COMMENT '广告类型状态',
+  `status` tinyint(2) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`advertising_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `ad_advertising_type` WRITE;
 /*!40000 ALTER TABLE `ad_advertising_type` DISABLE KEYS */;
 
-INSERT INTO `ad_advertising_type` (`advertising_type_id`, `advertising_type_name`, `advertising_type_status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `status`)
+INSERT INTO `ad_advertising_type` (`advertising_type_id`, `advertising_type_name`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `status`)
 VALUES
-	(1,'APP浮标',1,1,1,NULL,NULL,NULL,1),
-	(2,'WAP浮标',1,1,1,NULL,NULL,NULL,1),
-	(3,'WEB浮标',1,1,1,NULL,NULL,NULL,1);
+	(1,'APP浮标',1,1,'2017-11-25 19:10:32',NULL,NULL,1),
+	(2,'WAP浮标',1,1,'2017-11-25 19:10:32',NULL,NULL,1),
+	(3,'WEB浮标',1,1,'2017-11-25 19:10:32',NULL,NULL,1);
 
 /*!40000 ALTER TABLE `ad_advertising_type` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -160,9 +215,47 @@ LOCK TABLES `ad_attach` WRITE;
 
 INSERT INTO `ad_attach` (`attach_id`, `attach_mime_type`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `attach_relative_src`, `attach_info`, `attach_host`, `attach_api`, `hash_key`)
 VALUES
-	(1,'image/jpeg',1,1,0,'2017-11-30 14:50:16','2017-11-30 14:50:16',NULL,'storage/uploads/171130025016ad.jpeg','','','file_storage','28c8edde3d61a0411511d3b1866f0636');
+	(1,'image/jpeg',1,1,0,'2017-11-30 14:50:16','2017-11-30 14:50:16',NULL,'storage/uploads/171130025016ad.jpeg','','','file_storage','28c8edde3d61a0411511d3b1866f0636'),
+	(2,'image/jpeg',1,1,0,'2017-12-02 16:59:08','2017-12-02 16:59:08',NULL,'storage/uploads/171202045908bg.jpg','','','file_storage','665f644e43731ff9db3d341da5c827e1'),
+	(3,'image/jpeg',1,1,0,'2017-12-02 16:59:08','2017-12-02 16:59:08',NULL,'storage/uploads/171202045908ban.jpg','','','file_storage','38026ed22fc1a91d92b5d2ef93540f20'),
+	(4,'image/png',1,1,0,'2017-12-02 16:59:08','2017-12-02 16:59:08',NULL,'storage/uploads/171202045908turnplate-pointer.png','','','file_storage','011ecee7d295c066ae68d4396215c3d0'),
+	(5,'image/jpeg',1,1,0,'2017-12-02 17:03:23','2017-12-02 17:03:23',NULL,'storage/uploads/171202050323bg.jpg','','','file_storage','4e44f1ac85cd60e3caa56bfd4afb675e'),
+	(6,'image/jpeg',1,1,0,'2017-12-02 17:03:23','2017-12-02 17:03:23',NULL,'storage/uploads/171202050323ban.jpg','','','file_storage','3d2f8900f2e49c02b481c2f717aa9020'),
+	(7,'image/png',1,1,0,'2017-12-02 17:03:23','2017-12-02 17:03:23',NULL,'storage/uploads/171202050323turnplate-pointer.png','','','file_storage','cd7fd1517e323f26c6f1b0b6b96e3b3d'),
+	(8,'image/jpeg',1,1,0,'2017-12-03 08:17:11','2017-12-03 08:17:11',NULL,'storage/uploads/171203081711ad.jpeg','','','file_storage','815e6212def15fe76ed27cec7a393d59'),
+	(9,'image/jpeg',1,1,0,'2017-12-03 12:06:07','2017-12-03 12:06:07',NULL,'storage/uploads/171203120607zxg7h0lyxb.jpeg','','','file_storage','4c0d13d3ad6cc317017872e51d01b238'),
+	(10,'image/jpeg',1,1,0,'2017-12-03 12:06:07','2017-12-03 12:06:07',NULL,'storage/uploads/171203120607xr48yc95kl.jpg','','','file_storage','8d8e353b98d5191d5ceea1aa3eb05d43');
 
 /*!40000 ALTER TABLE `ad_attach` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table cookies_map
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `cookies_map`;
+
+CREATE TABLE `cookies_map` (
+  `cookies_map_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'cookies_map_id',
+  `cookies_uuid` char(34) NOT NULL DEFAULT '''''' COMMENT 'uuid',
+  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态字段',
+  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
+  `cookies` varchar(2000) DEFAULT '' COMMENT 'cookies',
+  `advertising_space_id` int(11) DEFAULT NULL COMMENT '广告位ID',
+  `slot` varchar(30) DEFAULT NULL COMMENT 'slot',
+  PRIMARY KEY (`cookies_map_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `cookies_map` WRITE;
+/*!40000 ALTER TABLE `cookies_map` DISABLE KEYS */;
+
+INSERT INTO `cookies_map` (`cookies_map_id`, `cookies_uuid`, `status`, `created_at`, `updated_at`, `deleted_at`, `cookies`, `advertising_space_id`, `slot`)
+VALUES
+	(1,'c4ca4238a0b923820dcc509a6f75849b',1,'2017-12-03 16:39:10','2017-12-03 16:39:10',NULL,'XSRF-TOKEN:bmBi72SnDMo7OQxLTdOeAL5DIBgroxWtCoB7dMhR,laravel_session:NFB5Lw11Uzfvc6ZwsUu2Q10dlGjYwLzOtvbQGs5Y',1,'00201e01e-0001-00000001');
+
+/*!40000 ALTER TABLE `cookies_map` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
@@ -180,9 +273,19 @@ CREATE TABLE `media` (
   `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
   `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
   `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
+  `media_type_id` int(11) DEFAULT NULL COMMENT '媒体类型',
   PRIMARY KEY (`media_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `media` WRITE;
+/*!40000 ALTER TABLE `media` DISABLE KEYS */;
+
+INSERT INTO `media` (`media_id`, `media_name`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `media_type_id`)
+VALUES
+	(1,'大力丸',1,1,0,'2017-11-25 19:10:32',NULL,NULL,1);
+
+/*!40000 ALTER TABLE `media` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table media_advertising_space
@@ -201,31 +304,21 @@ CREATE TABLE `media_advertising_space` (
   `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
   `advertising_space_strategy` text COMMENT '广告位策略',
   `advertising_space_attribute` text COMMENT '广告位属性',
-  `advertising_space_type_id` int(11) DEFAULT NULL COMMENT '广告位类型',
+  `advertising_type_id` int(11) DEFAULT NULL COMMENT '广告位类型',
   `media_id` int(11) DEFAULT NULL COMMENT '媒体ID',
   `advertising_space_code` text COMMENT '广告位代码',
   PRIMARY KEY (`advertising_space_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `media_advertising_space` WRITE;
+/*!40000 ALTER TABLE `media_advertising_space` DISABLE KEYS */;
 
+INSERT INTO `media_advertising_space` (`advertising_space_id`, `advertising_space_name`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `advertising_space_strategy`, `advertising_space_attribute`, `advertising_type_id`, `media_id`, `advertising_space_code`)
+VALUES
+	(1,'A',1,1,1,'2017-12-03 06:29:51','2017-12-03 08:17:29',NULL,NULL,'{\"width_height\":\"01E01E\",\"description\":\"GEA\",\"validity_date\":\"2017-12-31\"}',2,1,'<script async src=\"//192.168.1.101/renderjs/00201e01e-0001-00000001\"></script>\n            <ins class=\"adsbygoojo\" style=\"display:inline-block;width:30px;height:30px\" goojoad-ad-client=\"30\" goojoad-slot=\"00201e01e-0001-00000001\"></ins><script>\n             (adsbygoojo = window.adsbygoojo || []).push({});\n             </script>');
 
-# Dump of table media_advertising_space_type
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `media_advertising_space_type`;
-
-CREATE TABLE `media_advertising_space_type` (
-  `advertising_space_type_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '广告位类型ID',
-  `advertising_space_type_name` varchar(20) NOT NULL DEFAULT '''''' COMMENT '广告位类型名称',
-  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态字段',
-  `creator` int(11) DEFAULT '0' COMMENT '创建者ID',
-  `modified_by` int(11) DEFAULT '0' COMMENT '修改人',
-  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
-  `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
-  PRIMARY KEY (`advertising_space_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+/*!40000 ALTER TABLE `media_advertising_space` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table media_type
@@ -245,6 +338,15 @@ CREATE TABLE `media_type` (
   PRIMARY KEY (`media_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `media_type` WRITE;
+/*!40000 ALTER TABLE `media_type` DISABLE KEYS */;
+
+INSERT INTO `media_type` (`media_type_id`, `media_type_name`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`)
+VALUES
+	(1,'APP',1,1,0,'2017-11-25 19:10:32',NULL,NULL);
+
+/*!40000 ALTER TABLE `media_type` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table migrations
