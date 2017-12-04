@@ -12,6 +12,7 @@ use \App\Libraries\ActivityRender\Render as ActivityRender;
 use App\Model\Activity;
 use Illuminate\Support\Facades\Cookie;
 use App\Model\CookiesMap;
+use App\Libraries\ShortUrlInterface\ShortUrlHelper;
 
 class RequestController extends Controller
 {
@@ -158,6 +159,35 @@ class RequestController extends Controller
         $this->make($request,$log_type,$product->activity_product_id ,$slot,$pos,$otherinfo);
         
         return response()->json($output);
+        
+    }
+    
+    public function shortUrl(Request $request,$short_url){
+        
+        $request->all();
+        
+        $original_url = ShortUrlHelper::get($short_url);
+        
+        $log_type = 'CLICK';
+        
+        $pos='0,0';
+        
+        //$hash_string = sprintf("");
+        $cookies = $request->cookie();
+        
+        if(isset($cookies['uuid'])){
+            $otherinfo = 'EXIST_COOKIE:'.$cookies['uuid'].',TARGET:'.$original_url;;
+            $slot = Cookie::get('goojo_ad_slot');
+        }else{
+            //非正常请求
+            $otherinfo = 'TARGET:'.$original_url;
+            $slot = '';
+        }
+        
+        //
+        $this->make($request,$log_type, 'NOID' ,$slot,$pos,$otherinfo);
+        
+        return redirect($original_url);
         
     }
     

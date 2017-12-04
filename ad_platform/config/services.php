@@ -34,5 +34,9 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    
+    'shorturl'=>[
+        'uri'=>'http://192.168.1.106/t/'
+    ]
 
 ];

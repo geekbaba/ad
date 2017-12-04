@@ -89,7 +89,7 @@
                     
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
-                <script async src="//192.168.1.101/renderjs/00201e01e-0001-00000001"></script>
+                <script async src="//192.168.1.106/renderjs/00201e01e-0001-00000001"></script>
                     <ins class="adsbygoojo" style="display:inline-block;width:30px;height:30px" goojoad-ad-client="30" goojoad-slot="00201e01e-0001-00000001"></ins><script>
                      (adsbygoojo = window.adsbygoojo || []).push({});
                      </script>

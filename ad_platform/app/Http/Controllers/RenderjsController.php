@@ -26,9 +26,9 @@ class RenderjsController extends Controller
         //header('Content-Type:application/javascript');
         $data = Slot::extract($slot);
         
-        $analytics_server = 'http://192.168.1.101/analytics/';
-        $ssl_analytics_server = 'https://192.168.1.101/ssl_analytics/';
-        $ad_server = 'http://192.168.1.101/gad/';
+        $analytics_server = 'http://192.168.1.106/analytics/';
+        $ssl_analytics_server = 'https://192.168.1.106/ssl_analytics/';
+        $ad_server = 'http://192.168.1.106/gad/';
         
         $adspace['adsp_id'] = $data['advertising_space_id'];
         

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\UploadedFile;
 use App\Libraries\AttachInterface\AttachHelper;
+use App\Libraries\ShortUrlInterface\ShortUrlHelper;
 
 class AdController extends WithAuthController
 {
@@ -52,11 +53,22 @@ class AdController extends WithAuthController
         $advertising = $AdvertisingModel->where('advertising_id',$advertising_id)->first();
         
         //$advertising->advertising_attribute;
+        $urlkeys = Config::get('urlkeys');
         
         if($advertising->advertising_attribute!=''){
             
             $advertising_attribute = json_decode($advertising->advertising_attribute);
+            foreach ($advertising_attribute as $k=>$v){
+                if(in_array($k, $urlkeys)){
+                    $url = ShortUrlHelper::get($v);
+                    $advertising_attribute->$k = $url;
+                }else{
+                    $advertising_attribute->$k = $v;
+                }
+                
+            }
             $advertising->advertising_attributeObject = $advertising_attribute;
+            $advertising->advertising_attribute = json_encode($advertising_attribute);
         }
         
         $ad_templates = Config::get('ad-template');
@@ -105,7 +117,17 @@ class AdController extends WithAuthController
                 if(in_array($key, ['width_height'])){
                     $data[$key] = $value;
                 }
-                $attribute[$key] = $value;
+                $urlkeys = Config::get('urlkeys');
+                
+                //处理成短链接
+                if(in_array($key, $urlkeys)){
+                    
+                    $short_url = ShortUrlHelper::make($value);
+                    $attribute[$key] = $short_url;
+                    
+                }else{
+                    $attribute[$key] = $value;
+                }
             }
         }
         

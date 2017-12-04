@@ -21,6 +21,7 @@ Route::get('/login',  ['uses' => 'LoginController@index'])->name('login');
 
 Route::get('/gad/{slot}', ['uses' => 'RequestController@selectAd']);
 Route::get('/p/{activity_id}/{slot?}', ['as' => 'p','uses' => 'RequestController@selectProduct'])->where('activity_id', '[0-9]+');
+Route::get('/t/{shorturl}/', ['as' => 't','uses' => 'RequestController@shortUrl']);
 Route::get('/activity/{activity_id}', ['uses' => 'RequestController@showActivity'])->where('activity_id', '[0-9]+');
 Route::get('/test', ['uses' => 'TestController@index']);
 Route::get('/attach/{hash_key}', ['uses' => 'AttachController@attach']);

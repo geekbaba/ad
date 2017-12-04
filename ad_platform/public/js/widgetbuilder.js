@@ -180,6 +180,7 @@ WidgetBuilder = (function() {
 			html.push('<label class="col-md-3 form-control-label" for="file_'+ item.name +'">'+ item.display_name +'</label>');
 			html.push('<div class="col-md-9">');
 			html.push('<img style="width:50px;height:50px;" id="file_'+ item.name +'" src="/' + value + '" />');
+    		html.push('<input type="hidden" id="file_hidden_'+ item.name +'" name="'+ oThis.namePrefix +'['+ item.name +']" value="'+ value +'" />');
 			html.push('</div>');
 			html.push('</div>');
 		}else{

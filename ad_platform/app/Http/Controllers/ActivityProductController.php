@@ -10,6 +10,7 @@ use Illuminate\Http\UploadedFile;
 use App\Libraries\AttachInterface\AttachHelper;
 use App\Libraries\AttachInterface\Attach;
 use App\Model\ActivityProduct;
+use App\Libraries\ShortUrlInterface\ShortUrlHelper;
 
 class ActivityProductController extends WithAuthController
 {
@@ -39,6 +40,22 @@ class ActivityProductController extends WithAuthController
         
         $product = $ActivityProductModel->where('activity_product_id',$activity_product_id)->first();
         
+        $urlkeys = Config::get('urlkeys');
+        
+        if($product->activity_product_attribute!=''){
+            
+            $attribute = json_decode($product->activity_product_attribute);
+            foreach ($attribute as $k=>$v){
+                if(in_array($k, $urlkeys)){
+                    $url = ShortUrlHelper::get($v);
+                    $attribute->$k = $url;
+                }else{
+                    $attribute->$k = $v;
+                }
+            }
+            
+            $product->activity_product_attribute = json_encode($attribute);
+        }
         
         $product_configure = Config::get('product-0001');
         
@@ -96,7 +113,19 @@ class ActivityProductController extends WithAuthController
                     return response()->json($output);
                 }
             }else{
-                $attribute[$key] = $value;
+                
+                $urlkeys = Config::get('urlkeys');
+                //处理成短链接
+                if(in_array($key, $urlkeys)){
+                    
+                    $short_url = ShortUrlHelper::make($value);
+                    $attribute[$key] = $short_url;
+                    
+                }else{
+                 
+                    $attribute[$key] = $value;
+                   
+                }
             }
         }
         
