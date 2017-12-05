@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.11)
 # Database: ad
-# Generation Time: 2017-12-03 16:53:16 +0000
+# Generation Time: 2017-12-05 13:20:32 +0000
 # ************************************************************
 
 
@@ -77,7 +77,8 @@ LOCK TABLES `ad_activity_product` WRITE;
 
 INSERT INTO `ad_activity_product` (`activity_product_id`, `activity_product_name`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `activity_product_strategy`, `activity_product_attribute`)
 VALUES
-	(1,'流量免费送',1,1,0,'2017-12-03 12:06:07','2017-12-03 12:06:07',NULL,NULL,'{\"description\":\"\\u6d41\\u91cf\\u514d\\u8d39\\u9001\",\"button_name\":\"\\u9886\\u53d6\\u514d\\u8d39\\u6d41\\u91cf\",\"target_url\":\"https:\\/\\/m.10010.com/bj/\",\"validity_date\":\"2017-12-30\",\"product_image\":\"[Attach]:4c0d13d3ad6cc317017872e51d01b238\",\"product_list_image\":\"[Attach]:8d8e353b98d5191d5ceea1aa3eb05d43\"}');
+	(1,'流量免费送',1,1,1,'2017-12-03 12:06:07','2017-12-04 17:26:24',NULL,NULL,'{\"description\":\"\\u6d41\\u91cf\\u514d\\u8d39\\u9001\",\"button_name\":\"\\u9886\\u53d6\\u514d\\u8d39\\u6d41\\u91cf\",\"target_url\":\"http:\\/\\/192.168.1.106\\/t\\/026ed22fc1\",\"validity_date\":\"2017-12-30\"}'),
+	(2,'免费装修',1,1,1,'2017-12-04 16:15:08','2017-12-04 17:28:32',NULL,NULL,'{\"description\":\"asd\",\"button_name\":\"\\u514d\\u8d39\\u88c5\\u4fee\",\"target_url\":\"http:\\/\\/192.168.1.106\\/t\\/5f644e4373\",\"validity_date\":\"2017-12-30\",\"product_image\":\"[Attach]:f93b8bbbac89ea22bac0bf188ba49a61\",\"product_list_image\":\"[Attach]:ad8b68a55505a09ac7578f32418904b3\"}');
 
 /*!40000 ALTER TABLE `ad_activity_product` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -151,7 +152,7 @@ VALUES
 	(7,'asdas',0,1,0,'2017-11-30 14:31:04','2017-11-30 14:31:04',NULL,NULL,'{\"width_height\":\"000000\",\"target_url\":\"asdsa\",\"image\":{}}',2,NULL),
 	(8,'asd',0,1,0,'2017-11-30 14:33:07','2017-11-30 14:33:07',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":{}}',2,NULL),
 	(9,'asd',0,1,0,'2017-11-30 14:50:16','2017-11-30 14:50:16',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":\"[Attach]:28c8edde3d61a0411511d3b1866f0636\"}',1,NULL),
-	(10,'预选广告',1,1,0,'2017-12-03 08:17:11','2017-12-03 08:17:11',NULL,NULL,'{\"width_height\":\"01E01E\",\"target_url\":\"http://192.168.1.101/activity/1\",\"image\":\"[Attach]:815e6212def15fe76ed27cec7a393d59\"}',2,'01E01E');
+	(10,'预选广告',1,1,1,'2017-12-03 08:17:11','2017-12-04 17:20:57',NULL,NULL,'{\"image\":\"[Attach]:7e51746feafa7f2621f71943da8f603c\",\"width_height\":\"01E01E\",\"target_url\":\"http:\\/\\/192.168.1.106\\/t\\/c8edde3d61\"}',2,'01E01E');
 
 /*!40000 ALTER TABLE `ad_advertising` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -224,7 +225,12 @@ VALUES
 	(7,'image/png',1,1,0,'2017-12-02 17:03:23','2017-12-02 17:03:23',NULL,'storage/uploads/171202050323turnplate-pointer.png','','','file_storage','cd7fd1517e323f26c6f1b0b6b96e3b3d'),
 	(8,'image/jpeg',1,1,0,'2017-12-03 08:17:11','2017-12-03 08:17:11',NULL,'storage/uploads/171203081711ad.jpeg','','','file_storage','815e6212def15fe76ed27cec7a393d59'),
 	(9,'image/jpeg',1,1,0,'2017-12-03 12:06:07','2017-12-03 12:06:07',NULL,'storage/uploads/171203120607zxg7h0lyxb.jpeg','','','file_storage','4c0d13d3ad6cc317017872e51d01b238'),
-	(10,'image/jpeg',1,1,0,'2017-12-03 12:06:07','2017-12-03 12:06:07',NULL,'storage/uploads/171203120607xr48yc95kl.jpg','','','file_storage','8d8e353b98d5191d5ceea1aa3eb05d43');
+	(10,'image/jpeg',1,1,0,'2017-12-03 12:06:07','2017-12-03 12:06:07',NULL,'storage/uploads/171203120607xr48yc95kl.jpg','','','file_storage','8d8e353b98d5191d5ceea1aa3eb05d43'),
+	(11,'image/gif',1,1,0,'2017-12-04 16:15:08','2017-12-04 16:15:08',NULL,'storage/uploads/1712040415081k47r7he1t.gif','','','file_storage','7bfc85c0d74ff05806e0b5a0fa0c1df1'),
+	(12,'image/jpeg',1,1,0,'2017-12-04 16:15:08','2017-12-04 16:15:08',NULL,'storage/uploads/171204041508pe9kpwd8z6.jpg','','','file_storage','c8b2f17833a4c73bb20f88876219ddcd'),
+	(13,'image/jpeg',1,1,0,'2017-12-04 17:19:22','2017-12-04 17:19:22',NULL,'storage/uploads/171204051922ad.jpeg','','','file_storage','7e51746feafa7f2621f71943da8f603c'),
+	(14,'image/gif',1,1,0,'2017-12-04 17:28:32','2017-12-04 17:28:32',NULL,'storage/uploads/1712040528321k47r7he1t.gif','','','file_storage','f93b8bbbac89ea22bac0bf188ba49a61'),
+	(15,'image/jpeg',1,1,0,'2017-12-04 17:28:32','2017-12-04 17:28:32',NULL,'storage/uploads/171204052832pe9kpwd8z6.jpg','','','file_storage','ad8b68a55505a09ac7578f32418904b3');
 
 /*!40000 ALTER TABLE `ad_attach` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -253,7 +259,8 @@ LOCK TABLES `cookies_map` WRITE;
 
 INSERT INTO `cookies_map` (`cookies_map_id`, `cookies_uuid`, `status`, `created_at`, `updated_at`, `deleted_at`, `cookies`, `advertising_space_id`, `slot`)
 VALUES
-	(1,'c4ca4238a0b923820dcc509a6f75849b',1,'2017-12-03 16:39:10','2017-12-03 16:39:10',NULL,'XSRF-TOKEN:bmBi72SnDMo7OQxLTdOeAL5DIBgroxWtCoB7dMhR,laravel_session:NFB5Lw11Uzfvc6ZwsUu2Q10dlGjYwLzOtvbQGs5Y',1,'00201e01e-0001-00000001');
+	(1,'c4ca4238a0b923820dcc509a6f75849b',1,'2017-12-03 16:39:10','2017-12-03 16:39:10',NULL,'XSRF-TOKEN:bmBi72SnDMo7OQxLTdOeAL5DIBgroxWtCoB7dMhR,laravel_session:NFB5Lw11Uzfvc6ZwsUu2Q10dlGjYwLzOtvbQGs5Y',1,'00201e01e-0001-00000001'),
+	(2,'c81e728d9d4c2f636f067f89cc14862c',1,'2017-12-04 16:11:59','2017-12-04 16:11:59',NULL,'XSRF-TOKEN:6lfYwbU0dmQMCTpWWdlEsVbHwQwUPvrGulA4aKi8,laravel_session:b3Lax3cMSnFkyBEc8UAKNW6G61DL39k7PZJANFRX',1,'00201e01e-0001-00000001');
 
 /*!40000 ALTER TABLE `cookies_map` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -315,7 +322,7 @@ LOCK TABLES `media_advertising_space` WRITE;
 
 INSERT INTO `media_advertising_space` (`advertising_space_id`, `advertising_space_name`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `advertising_space_strategy`, `advertising_space_attribute`, `advertising_type_id`, `media_id`, `advertising_space_code`)
 VALUES
-	(1,'A',1,1,1,'2017-12-03 06:29:51','2017-12-03 08:17:29',NULL,NULL,'{\"width_height\":\"01E01E\",\"description\":\"GEA\",\"validity_date\":\"2017-12-31\"}',2,1,'<script async src=\"//192.168.1.101/renderjs/00201e01e-0001-00000001\"></script>\n            <ins class=\"adsbygoojo\" style=\"display:inline-block;width:30px;height:30px\" goojoad-ad-client=\"30\" goojoad-slot=\"00201e01e-0001-00000001\"></ins><script>\n             (adsbygoojo = window.adsbygoojo || []).push({});\n             </script>');
+	(1,'A',1,1,1,'2017-12-03 06:29:51','2017-12-03 08:17:29',NULL,NULL,'{\"width_height\":\"01E01E\",\"description\":\"GEA\",\"validity_date\":\"2017-12-31\"}',2,1,'<script async src=\"//192.168.1.106/renderjs/00201e01e-0001-00000001\"></script>\n            <ins class=\"adsbygoojo\" style=\"display:inline-block;width:30px;height:30px\" goojoad-ad-client=\"30\" goojoad-slot=\"00201e01e-0001-00000001\"></ins><script>\n             (adsbygoojo = window.adsbygoojo || []).push({});\n             </script>');
 
 /*!40000 ALTER TABLE `media_advertising_space` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -467,6 +474,40 @@ CREATE TABLE `roles` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+
+
+# Dump of table shorturl
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `shorturl`;
+
+CREATE TABLE `shorturl` (
+  `shorturl_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '短链接ID',
+  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态字段',
+  `creator` int(11) DEFAULT '0' COMMENT '创建者ID',
+  `modified_by` int(11) DEFAULT '0' COMMENT '修改人',
+  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `deleted_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
+  `original_url` varchar(500) DEFAULT '' COMMENT '原始链接',
+  `shorturl` char(10) DEFAULT NULL COMMENT '短链接key',
+  `hash_key` char(32) DEFAULT '' COMMENT '短链接hashkey',
+  PRIMARY KEY (`shorturl_id`),
+  UNIQUE KEY `shorturl` (`shorturl`),
+  KEY `hash_key` (`hash_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `shorturl` WRITE;
+/*!40000 ALTER TABLE `shorturl` DISABLE KEYS */;
+
+INSERT INTO `shorturl` (`shorturl_id`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `original_url`, `shorturl`, `hash_key`)
+VALUES
+	(1,1,1,0,'2017-12-04 17:12:14','2017-12-04 17:12:14',NULL,'http://192.168.1.106/activity/1','c8edde3d61','1d23a35f365c0850c8ad0bc657d7037b'),
+	(2,1,1,0,'2017-12-04 17:23:55','2017-12-04 17:23:55',NULL,'http://tf.icolor.com.cn/pcbj_baidu','5f644e4373','872c0b6f9dfcbbb5debd5abce4a49e3a'),
+	(3,1,1,0,'2017-12-04 17:26:24','2017-12-04 17:26:24',NULL,'https://m.10010.com/bj/','026ed22fc1','cc9a474348f1157de6d3b40f911e89f7');
+
+/*!40000 ALTER TABLE `shorturl` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table users
