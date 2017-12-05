@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.11)
 # Database: ad
-# Generation Time: 2017-12-05 13:20:32 +0000
+# Generation Time: 2017-12-05 13:35:56 +0000
 # ************************************************************
 
 
@@ -77,8 +77,8 @@ LOCK TABLES `ad_activity_product` WRITE;
 
 INSERT INTO `ad_activity_product` (`activity_product_id`, `activity_product_name`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `activity_product_strategy`, `activity_product_attribute`)
 VALUES
-	(1,'流量免费送',1,1,1,'2017-12-03 12:06:07','2017-12-04 17:26:24',NULL,NULL,'{\"description\":\"\\u6d41\\u91cf\\u514d\\u8d39\\u9001\",\"button_name\":\"\\u9886\\u53d6\\u514d\\u8d39\\u6d41\\u91cf\",\"target_url\":\"http:\\/\\/192.168.1.106\\/t\\/026ed22fc1\",\"validity_date\":\"2017-12-30\"}'),
-	(2,'免费装修',1,1,1,'2017-12-04 16:15:08','2017-12-04 17:28:32',NULL,NULL,'{\"description\":\"asd\",\"button_name\":\"\\u514d\\u8d39\\u88c5\\u4fee\",\"target_url\":\"http:\\/\\/192.168.1.106\\/t\\/5f644e4373\",\"validity_date\":\"2017-12-30\",\"product_image\":\"[Attach]:f93b8bbbac89ea22bac0bf188ba49a61\",\"product_list_image\":\"[Attach]:ad8b68a55505a09ac7578f32418904b3\"}');
+	(1,'流量免费送',1,1,1,'2017-12-03 12:06:07','2017-12-04 17:26:24',NULL,NULL,'{\"description\":\"\\u6d41\\u91cf\\u514d\\u8d39\\u9001\",\"button_name\":\"\\u9886\\u53d6\\u514d\\u8d39\\u6d41\\u91cf\",\"target_url\":\"http:\\/\\/115.47.154.90\\/t\\/026ed22fc1\",\"validity_date\":\"2017-12-30\"}'),
+	(2,'免费装修',1,1,1,'2017-12-04 16:15:08','2017-12-04 17:28:32',NULL,NULL,'{\"description\":\"asd\",\"button_name\":\"\\u514d\\u8d39\\u88c5\\u4fee\",\"target_url\":\"http:\\/\\/115.47.154.90\\/t\\/5f644e4373\",\"validity_date\":\"2017-12-30\",\"product_image\":\"[Attach]:f93b8bbbac89ea22bac0bf188ba49a61\",\"product_list_image\":\"[Attach]:ad8b68a55505a09ac7578f32418904b3\"}');
 
 /*!40000 ALTER TABLE `ad_activity_product` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -152,7 +152,7 @@ VALUES
 	(7,'asdas',0,1,0,'2017-11-30 14:31:04','2017-11-30 14:31:04',NULL,NULL,'{\"width_height\":\"000000\",\"target_url\":\"asdsa\",\"image\":{}}',2,NULL),
 	(8,'asd',0,1,0,'2017-11-30 14:33:07','2017-11-30 14:33:07',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":{}}',2,NULL),
 	(9,'asd',0,1,0,'2017-11-30 14:50:16','2017-11-30 14:50:16',NULL,NULL,'{\"width_height\":\"0F00F0\",\"target_url\":\"asd\",\"image\":\"[Attach]:28c8edde3d61a0411511d3b1866f0636\"}',1,NULL),
-	(10,'预选广告',1,1,1,'2017-12-03 08:17:11','2017-12-04 17:20:57',NULL,NULL,'{\"image\":\"[Attach]:7e51746feafa7f2621f71943da8f603c\",\"width_height\":\"01E01E\",\"target_url\":\"http:\\/\\/192.168.1.106\\/t\\/c8edde3d61\"}',2,'01E01E');
+	(10,'预选广告',1,1,1,'2017-12-03 08:17:11','2017-12-04 17:20:57',NULL,NULL,'{\"image\":\"[Attach]:7e51746feafa7f2621f71943da8f603c\",\"width_height\":\"01E01E\",\"target_url\":\"http:\\/\\/115.47.154.90\\/t\\/c8edde3d61\"}',2,'01E01E');
 
 /*!40000 ALTER TABLE `ad_advertising` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -322,7 +322,7 @@ LOCK TABLES `media_advertising_space` WRITE;
 
 INSERT INTO `media_advertising_space` (`advertising_space_id`, `advertising_space_name`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `advertising_space_strategy`, `advertising_space_attribute`, `advertising_type_id`, `media_id`, `advertising_space_code`)
 VALUES
-	(1,'A',1,1,1,'2017-12-03 06:29:51','2017-12-03 08:17:29',NULL,NULL,'{\"width_height\":\"01E01E\",\"description\":\"GEA\",\"validity_date\":\"2017-12-31\"}',2,1,'<script async src=\"//192.168.1.106/renderjs/00201e01e-0001-00000001\"></script>\n            <ins class=\"adsbygoojo\" style=\"display:inline-block;width:30px;height:30px\" goojoad-ad-client=\"30\" goojoad-slot=\"00201e01e-0001-00000001\"></ins><script>\n             (adsbygoojo = window.adsbygoojo || []).push({});\n             </script>');
+	(1,'A',1,1,1,'2017-12-03 06:29:51','2017-12-03 08:17:29',NULL,NULL,'{\"width_height\":\"01E01E\",\"description\":\"GEA\",\"validity_date\":\"2017-12-31\"}',2,1,'<script async src=\"//115.47.154.90/renderjs/00201e01e-0001-00000001\"></script>\n            <ins class=\"adsbygoojo\" style=\"display:inline-block;width:30px;height:30px\" goojoad-ad-client=\"30\" goojoad-slot=\"00201e01e-0001-00000001\"></ins><script>\n             (adsbygoojo = window.adsbygoojo || []).push({});\n             </script>');
 
 /*!40000 ALTER TABLE `media_advertising_space` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -502,7 +502,7 @@ LOCK TABLES `shorturl` WRITE;
 
 INSERT INTO `shorturl` (`shorturl_id`, `status`, `creator`, `modified_by`, `created_at`, `updated_at`, `deleted_at`, `original_url`, `shorturl`, `hash_key`)
 VALUES
-	(1,1,1,0,'2017-12-04 17:12:14','2017-12-04 17:12:14',NULL,'http://192.168.1.106/activity/1','c8edde3d61','1d23a35f365c0850c8ad0bc657d7037b'),
+	(1,1,1,0,'2017-12-04 17:12:14','2017-12-04 17:12:14',NULL,'http://115.47.154.90/activity/1','c8edde3d61','1d23a35f365c0850c8ad0bc657d7037b'),
 	(2,1,1,0,'2017-12-04 17:23:55','2017-12-04 17:23:55',NULL,'http://tf.icolor.com.cn/pcbj_baidu','5f644e4373','872c0b6f9dfcbbb5debd5abce4a49e3a'),
 	(3,1,1,0,'2017-12-04 17:26:24','2017-12-04 17:26:24',NULL,'https://m.10010.com/bj/','026ed22fc1','cc9a474348f1157de6d3b40f911e89f7');
 
