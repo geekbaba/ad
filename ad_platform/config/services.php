@@ -36,12 +36,12 @@ return [
     ],
     
     'shorturl'=>[
-        'uri'=>'http://45.121.142.80/t/'
+        'uri'=>'http://192.168.10.125/t/'
     ],
 
     'server_host'=>[
-        'adserver'=>'45.121.142.80'
-        ,'http_adserver'=>'http://45.121.142.80'
+        'adserver'=>'192.168.10.125'
+        ,'http_adserver'=>'http://192.168.10.125'
     ]
 
 ];

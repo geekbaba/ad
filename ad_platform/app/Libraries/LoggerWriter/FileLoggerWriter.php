@@ -40,5 +40,12 @@ class FileLoggerWriter extends Log{
         $files = file(self::$file_path);
         return $files;
     }
-    
+
+    public static function loggerOk($file){
+        self::$file_path = self::$file_dir.$file;
+        rename(self::$file_path, self::$file_path.'.ok');
+        return true;
+    }
+
+
 }

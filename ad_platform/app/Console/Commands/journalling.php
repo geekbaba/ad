@@ -29,6 +29,8 @@ class journalling extends Command
     protected $mem = [];
     protected $batchMaxCount = 2000;
 
+    private $separator = '-';
+
     /**
      * Create a new command instance.
      *
@@ -63,9 +65,11 @@ class journalling extends Command
                 $this->dealLine($logger,$lineNumber,$log);
             }
 
+            LoggerWriter::loggerOk($logger);
+
         }
 
-
+        $this->dealMem();
 
 
     }
@@ -175,27 +179,27 @@ class journalling extends Command
             case 'ADS_REQ':
                 //广告位请求
                 $loggerType =1;
-                $key = $Ymd.'_'.$H.'_'.$log_type.'_'.(int)$id;
+                $key = $Ymd.$this->separator.$H.$this->separator.$log_type.$this->separator.(int)$id;
 
                 break;
             case 'QUERY_AD':
                 //广告展示
                 $loggerType =2;
-                $key = $Ymd.'_'.$H.'_'.$log_type.'_'.(int)$id;
+                $key = $Ymd.$this->separator.$H.$this->separator.$log_type.$this->separator.(int)$id;
 
                 break;
 
             case 'ACTIVITY_JS_REQ':
                 //活动请求
                 $loggerType =3;
-                $key = $Ymd.'_'.$H.'_'.$log_type.'_'.(int)$id;
+                $key = $Ymd.$this->separator.$H.$this->separator.$log_type.$this->separator.(int)$id;
 
                 break;
 
             case 'ACTIVITY_SHOW':
                 //活动展示
                 $loggerType =4;
-                $key = $Ymd.'_'.$H.'_'.$log_type.'_'.(int)$id;
+                $key = $Ymd.$this->separator.$H.$this->separator.$log_type.$this->separator.(int)$id;
 
                 break;
             case 'PRODUCT_SHOW':
@@ -203,7 +207,7 @@ class journalling extends Command
                 $loggerType =5;
 
                 //2
-                $key = $Ymd.'_'.$H.'_'.$log_type.'_'.(int)$id;
+                $key = $Ymd.$this->separator.$H.$this->separator.$log_type.$this->separator.(int)$id;
 
                 break;
 
@@ -211,7 +215,7 @@ class journalling extends Command
                 //点击统计
                 $loggerType =6;
                 $SHORT_URL_CODE = $attrs['SHORT_URL_CODE'];
-                $key = $Ymd.'_'.$H.'_'.$log_type.'_'.$SHORT_URL_CODE;
+                $key = $Ymd.$this->separator.$H.$this->separator.$log_type.$this->separator.$SHORT_URL_CODE;
 
                 break;
             default:
@@ -239,7 +243,7 @@ class journalling extends Command
 
         $this->mem;
         foreach ($this->mem as $key=>$count){
-            $attr = explode('_',$key);
+            $attr = explode($this->separator,$key);
             $ymd = $attr[0];
             $h = $attr[1];
             $log_type = $attr[2];

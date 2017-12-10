@@ -19,4 +19,10 @@ class LoggerWriter{
         FileLoggerWriter::init();
         return FileLoggerWriter::readLogger($file);
     }
+
+    public static function loggerOk($file){
+        FileLoggerWriter::init();
+        return FileLoggerWriter::loggerOk($file);
+    }
+
 }
