@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Enum\ShortUrlType;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
@@ -118,7 +119,7 @@ class ActivityProductController extends WithAuthController
                 //处理成短链接
                 if(in_array($key, $urlkeys)){
                     
-                    $short_url = ShortUrlHelper::make($value);
+                    $short_url = ShortUrlHelper::make($value,ShortUrlType::AD_PRODUT);
                     $attribute[$key] = $short_url;
                     
                 }else{

@@ -19,7 +19,7 @@ class ShortUrlHelper {
      * 
      * @param string $original_url original_url
      */
-     static function make($original_url){
+     static function make($original_url,$type){
          
          $user = Auth::user();
          
@@ -28,9 +28,10 @@ class ShortUrlHelper {
          $attr['status'] = 1;
          
          $attr['original_url'] = $original_url;
-         
+
          $attr['creator'] = $user->user_id;
-         
+         $attr['type'] = $type;
+
          $shortUrl = MysqlShortUrlHelper::make($attr);
          $uri = Config::get('services.shorturl.uri');
          return $uri.$shortUrl->shorturl;

@@ -16,6 +16,7 @@ class ShortUrl extends CommonModel
         ,'shorturl'
         ,'status'
         ,'hash_key'
+        ,'type'
     ];
     
 }

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Libraries\LoogerWriter\LoggerWriter;
+use App\Model\AdLogs;
 use Illuminate\Console\Command;
 
 class journalling extends Command
@@ -43,10 +44,15 @@ class journalling extends Command
         $loggers = LoggerWriter::getLoggers();
         foreach ($loggers as $logger){
 
+            if(substr($logger,0,2)!='AD'){
+                continue;
+            }
+
             $logs = LoggerWriter::readLogger($logger);
 
-            foreach ($logs as $lineNumber=> $log){
-                $this->dealLine($lineNumber,$log);
+            foreach ($logs as $indexer=> $log){
+                $lineNumber = $indexer + 1;
+                $this->dealLine($logger,$lineNumber,$log);
             }
 
         }
@@ -56,7 +62,7 @@ class journalling extends Command
 
     }
 
-    protected function dealLine($lineNumber,$line){
+    protected function dealLine(&$logger,&$lineNumber,$line){
 
         $sp = chr(1).chr(2);
         $lineNumber;
@@ -88,6 +94,99 @@ class journalling extends Command
         $HTTP_REFERER = $arr[8];
         $pos = $arr[9];
         $others = $arr[10];
+
+        $AdLogsModel = new AdLogs();
+
+
+        $isExistLog = $AdLogsModel->where('logger',$logger)->where('line',$lineNumber)->first();
+        if(!isset($isExistLog->log_id)){
+
+            $data = [
+                'request_time'=>$DATETIME
+                ,'request_time_float'=>$REQUEST_TIME_FLOAT
+                ,'log_type'=>$log_type
+                ,'object_id'=>(int)$id
+                ,'ad_slot'=>$slot
+                ,'remote_ip'=>$REMOTE_IP
+                ,'user_agent'=>$USER_AGENT
+                ,'cookies'=>$COOKIE
+                ,'http_referer'=>$HTTP_REFERER
+                ,'pos'=>$pos
+                ,'others'=>$others
+                ,'logger'=>$logger
+                ,'line'=>$lineNumber
+            ];
+
+            $AdLogsModel->create($data);
+        }
+
+
+        $loggerType = 0;
+
+        switch ($log_type){
+            case 'ADS_REQ':
+
+                $loggerType =1;
+
+                break;
+            case 'QUERY_AD':
+
+                $loggerType =2;
+
+                break;
+
+            case 'ACTIVITY_SHOW':
+
+                $loggerType =3;
+
+                break;
+            case 'PRODUCT_SHOW':
+
+                $loggerType =4;
+
+                break;
+
+            case 'CLICK':
+
+                $loggerType =5;
+
+                break;
+            default:
+
+                break;
+        }
+
+
+        $COOKIE_ITEMS = explode(',',$COOKIE);
+
+        $COOKIE_ATTRS = [];
+        foreach ($COOKIE_ITEMS as $item){
+
+            $info = explode(':',$item);
+
+            if(isset($info[1])) {
+                $key = $info[0];
+                $value = $info[1];
+                $COOKIE_ATTRS[$key] = $value;
+            }
+        }
+
+        $others_attr = explode(',',$others);
+
+        $attrs = [];
+
+        foreach ($others_attr as $item){
+
+            $info = explode(':',$item);
+
+            if(isset($info[1])){
+                $key = $info[0];
+                $value = $info[1];
+                $attrs[$key] = $value;
+            }
+
+        }
+
 
     }
 }

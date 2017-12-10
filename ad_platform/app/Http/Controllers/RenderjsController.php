@@ -7,6 +7,8 @@ use App\Libraries\AdvertisingSpace\Slot;
 use App\Model\Activity;
 use Illuminate\Http\Request;
 use App\Model\ActivitySkin;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use App\Traits\RequestPretreatment;
 
@@ -25,10 +27,12 @@ class RenderjsController extends Controller
         //Content-Type:
         //header('Content-Type:application/javascript');
         $data = Slot::extract($slot);
-        
-        $analytics_server = 'http://45.121.142.80/analytics/';
-        $ssl_analytics_server = 'https://45.121.142.80/ssl_analytics/';
-        $ad_server = 'http://45.121.142.80/gad/';
+        $server_host = Config::get('services.server_host.adserver');
+
+        $analytics_server = "http://{$server_host}/analytics/";
+        $ssl_analytics_server = "https://{$server_host}/ssl_analytics/";
+        $ad_server = "http://{$server_host}/gad/";
+
         
         $adspace['adsp_id'] = $data['advertising_space_id'];
         
@@ -74,9 +78,16 @@ class RenderjsController extends Controller
         }
         
         $activity_skin = $ActivitySkinModel->where('activity_skin_id',$skin_id)->first();
-        
+
         $skin_configure_code = $activity->skin_configure_code;
-        
+
+        $log_type = 'ACTIVITY_JS_REQ';
+
+        $slot = Cookie::get('goojo_ad_slot');
+
+        $pos='0,0';
+        $this->make($request,$log_type,$activity_id,$slot,$pos);
+
         return response()->view('activity_js.'.$skin_configure_code,['activity_id'=>$activity_id,'activity_skin'=>$activity_skin])->header('Content-Type', 'application/javascript');
         
     }
