@@ -75,7 +75,7 @@ Route::group(['middleware' => 'web'], function ($router) {
         $router->post('/store', ['as' => 'product/store','uses' => 'ActivityProductController@store']);
         
     });
-    
+
     /**
      * 广告位管理路由
      */
@@ -84,9 +84,14 @@ Route::group(['middleware' => 'web'], function ($router) {
         $router->get('/create', ['uses' => 'MediaAdvertisingSpaceController@create']);
         $router->get('/edit/{advertising_space_id}', ['uses' => 'MediaAdvertisingSpaceController@edit'])->where('advertising_space_id', '[0-9]+');
         $router->post('/store', ['as' => 'adspace/store','uses' => 'MediaAdvertisingSpaceController@store']);
-        
+
     });
-        
-    
-    
+
+
+    $router->group(['prefix'=>'statistics'],function($router){
+        $router->get('/show_hour', ['uses' => 'StatisticsController@showHourStatisticsList']);
+        $router->get('/show_day',  ['uses' => 'StatisticsController@showDayStatisticsList']);
+    });
+
+
 });

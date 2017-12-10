@@ -247,13 +247,14 @@ class journalling extends Command
             $ymd = $attr[0];
             $h = $attr[1];
             $log_type = $attr[2];
-            $id = $attr[3];
+            $id = trim($attr[3],"\n");
             //$key = $Ymd.'_'.$H.'_'.$log_type.'_'.(int)$id;
             if($log_type=='CLICK'){
-
                 $exists = $AdClickStatisticsModel->where('request_day',$ymd)
                     ->where('request_hour',$h)->where('log_type',$log_type)
                     ->where('shorturl',$id)->first();
+
+                
 
                 if(isset($exists->ad_click_statistics_id)){
 
