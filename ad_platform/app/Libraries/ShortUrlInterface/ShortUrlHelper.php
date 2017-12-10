@@ -10,11 +10,19 @@ class ShortUrlHelper {
      
      static function get($short_url){
          
-         $uri = Config::get('services.shorturl.uri');
-         $short_url = str_replace($uri, '', $short_url);
+         $short_url = self::getCode($short_url);
+
          return MysqlShortUrlHelper::get($short_url);
      }
-     
+
+    static function getCode($short_url){
+
+        $uri = Config::get('services.shorturl.uri');
+
+        $short_url = str_replace($uri, '', $short_url);
+
+        return $short_url;
+    }
     /**
      * 
      * @param string $original_url original_url

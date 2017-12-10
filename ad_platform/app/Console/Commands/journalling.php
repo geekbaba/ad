@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Libraries\LoogerWriter\LoggerWriter;
+use App\Model\AdClickStatistics;
 use App\Model\AdLogs;
+use App\Model\AdShowStatistics;
 use Illuminate\Console\Command;
 
 class journalling extends Command
@@ -21,6 +23,11 @@ class journalling extends Command
      * @var string
      */
     protected $description = 'Command description';
+
+    protected $count = 0;
+
+    protected $mem = [];
+    protected $batchMaxCount = 2000;
 
     /**
      * Create a new command instance.
@@ -51,6 +58,7 @@ class journalling extends Command
             $logs = LoggerWriter::readLogger($logger);
 
             foreach ($logs as $indexer=> $log){
+                $this->count++;
                 $lineNumber = $indexer + 1;
                 $this->dealLine($logger,$lineNumber,$log);
             }
@@ -80,8 +88,6 @@ class journalling extends Command
             .$other;
          */
         $arr = explode($sp,$line);
-
-        dump($arr);
 
         $DATETIME = $arr[0];
         $REQUEST_TIME_FLOAT = $arr[1];
@@ -121,40 +127,6 @@ class journalling extends Command
         }
 
 
-        $loggerType = 0;
-
-        switch ($log_type){
-            case 'ADS_REQ':
-
-                $loggerType =1;
-
-                break;
-            case 'QUERY_AD':
-
-                $loggerType =2;
-
-                break;
-
-            case 'ACTIVITY_SHOW':
-
-                $loggerType =3;
-
-                break;
-            case 'PRODUCT_SHOW':
-
-                $loggerType =4;
-
-                break;
-
-            case 'CLICK':
-
-                $loggerType =5;
-
-                break;
-            default:
-
-                break;
-        }
 
 
         $COOKIE_ITEMS = explode(',',$COOKIE);
@@ -188,5 +160,148 @@ class journalling extends Command
         }
 
 
+
+        //时间处理
+        //$DATETIME;
+        $t = (int)$REQUEST_TIME_FLOAT;
+
+        $Ymd = date('Ymd',$t);
+        $H = date('H',$t);
+
+
+        $loggerType = 0;
+
+        switch ($log_type){
+            case 'ADS_REQ':
+                //广告位请求
+                $loggerType =1;
+                $key = $Ymd.'_'.$H.'_'.$log_type.'_'.(int)$id;
+
+                break;
+            case 'QUERY_AD':
+                //广告展示
+                $loggerType =2;
+                $key = $Ymd.'_'.$H.'_'.$log_type.'_'.(int)$id;
+
+                break;
+
+            case 'ACTIVITY_JS_REQ':
+                //活动请求
+                $loggerType =3;
+                $key = $Ymd.'_'.$H.'_'.$log_type.'_'.(int)$id;
+
+                break;
+
+            case 'ACTIVITY_SHOW':
+                //活动展示
+                $loggerType =4;
+                $key = $Ymd.'_'.$H.'_'.$log_type.'_'.(int)$id;
+
+                break;
+            case 'PRODUCT_SHOW':
+                //产品展示
+                $loggerType =5;
+
+                //2
+                $key = $Ymd.'_'.$H.'_'.$log_type.'_'.(int)$id;
+
+                break;
+
+            case 'CLICK':
+                //点击统计
+                $loggerType =6;
+                $SHORT_URL_CODE = $attrs['SHORT_URL_CODE'];
+                $key = $Ymd.'_'.$H.'_'.$log_type.'_'.$SHORT_URL_CODE;
+
+                break;
+            default:
+
+                break;
+        }
+
+        if(isset($this->mem[$key])){
+            $this->mem[$key]++;
+        }else{
+            $this->mem[$key] = 1;
+        }
+
+        if($this->count >= $this->batchMaxCount){
+
+            $this->dealMem();
+        }
+
+    }
+
+    private function dealMem(){
+
+       $AdClickStatisticsModel = new AdClickStatistics();
+       $AdShowStatisticsModel = new AdShowStatistics();
+
+        $this->mem;
+        foreach ($this->mem as $key=>$count){
+            $attr = explode('_',$key);
+            $ymd = $attr[0];
+            $h = $attr[1];
+            $log_type = $attr[2];
+            $id = $attr[3];
+            //$key = $Ymd.'_'.$H.'_'.$log_type.'_'.(int)$id;
+            if($log_type=='CLICK'){
+
+                $exists = $AdClickStatisticsModel->where('request_day',$ymd)
+                    ->where('request_hour',$h)->where('log_type',$log_type)
+                    ->where('shorturl',$id)->first();
+
+                if(isset($exists->ad_click_statistics_id)){
+
+                    $exists->count = $exists->count + $count;
+                    $exists->save();
+
+                }else{
+
+                    $data = [
+                        'request_day'=>$ymd
+                        ,'request_hour'=>$h
+                        ,'log_type'=>$log_type
+                        ,'shorturl'=>$id
+                        ,'count'=>$count
+                        ,'cheat_count'=>0
+                    ];
+
+                    $AdClickStatisticsModel->create($data);
+
+                }
+
+            }else{
+
+
+                $exists = $AdShowStatisticsModel->where('request_day',$ymd)
+                    ->where('request_hour',$h)->where('log_type',$log_type)
+                    ->where('object_id',$id)->first();
+
+                if(isset($exists->ad_show_statistics_id)){
+
+                    $exists->count = $exists->count + $count;
+                    $exists->save();
+
+                }else{
+
+                    $data = [
+                        'request_day'=>$ymd
+                        ,'request_hour'=>$h
+                        ,'log_type'=>$log_type
+                        ,'object_id'=>$id
+                        ,'count'=>$count
+                        ,'cheat_count'=>0
+                    ];
+
+                    $AdShowStatisticsModel->create($data);
+
+                }
+
+            }
+            //statistics
+        }
+
+        $this->mem = [];
     }
 }

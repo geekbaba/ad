@@ -167,7 +167,7 @@ class RequestController extends Controller
         $request->all();
         
         $original_url = ShortUrlHelper::get($short_url);
-        
+        $short_url_code = ShortUrlHelper::getCode($short_url);
         $log_type = 'CLICK';
         
         $pos='0,0';
@@ -176,11 +176,11 @@ class RequestController extends Controller
         $cookies = $request->cookie();
         
         if(isset($cookies['uuid'])){
-            $otherinfo = 'EXIST_COOKIE:'.$cookies['uuid'].',TARGET:'.$original_url;;
+            $otherinfo = 'EXIST_COOKIE:'.$cookies['uuid'].',TARGET:'.$original_url.',SHORT_URL_CODE:'.$short_url_code;
             $slot = Cookie::get('goojo_ad_slot');
         }else{
             //非正常请求
-            $otherinfo = 'TARGET:'.$original_url;
+            $otherinfo = 'TARGET:'.$original_url.',SHORT_URL_CODE:'.$short_url_code;
             $slot = '';
         }
         
