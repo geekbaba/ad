@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>{{$title}}</title>
-
-    <link href="{{asset('activity/0001/css/index.css')}}" rel="stylesheet" type="text/css">
+@extends('render.activity.layout')
+@section('jsimport')
     <script type="text/javascript" src="{{asset('activity/0001/js/jquery-1.10.2.js')}}"></script>
     <script type="text/javascript" src="{{asset('activity/0001/js/awardRotate.js')}}"></script>
     <script type="text/javascript" src="{{asset('activity/0001/js/fontSize.js')}}"></script>
     <script type="text/javascript" src="/activityjs/1/js"></script>
-</head>
+@stop
+
+@section('content')
 <body style="background:#bb2e30;overflow-x:hidden;">
 <!--奖项图片-->
 <img src="{{asset('activity/0001/images/hb80.png')}}" id="img-80" style="display:none;"/>
@@ -28,7 +22,7 @@
         <div class="header">
 
         </div>
-        <div class="turnplate" style="background-image:url({{asset('activity/0001/images/turnplate-bg.png')}});background-size:100% 100%;">
+        <div class="turnplate" style="background-image:url(/{{$main_background_image}});background-size:100% 100%;">
             <canvas class="item" id="wheelcanvas" width="422px" height="422px"></canvas>
             <img class="pointer" src="{{asset('activity/0001/images/turnplate-pointer.png')}}"/>
         </div>
@@ -99,5 +93,254 @@
             </div>
         </div>
 </div>
-</body>
-</html>
+@stop
+
+
+@section('css')
+<style>
+    body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div{margin:0;padding:0;border:0;}
+    body{color:#333; font-size:12px;font-family:"Microsoft YaHei"}
+    ul,ol{list-style-type:none;}
+    select,input,img,select{vertical-align:middle;}
+    input{ font-size:12px;}
+    a{ text-decoration:none; color:#000;}
+    a:hover{color:#c00; text-decoration:none;}
+    .clear{clear:both;}
+    .wrap{
+        width: 7.5rem;
+        margin: 0 auto;
+        position: relative;
+    }
+    /* 大转盘样式 */
+    .banner{display:block;width:100%;height:12.06rem;margin-left:auto;margin-right:auto;margin-bottom: 20px;background: url("{{asset('activity/0001/images/bg.jpg')}}")no-repeat;background-size: contain;overflow: hidden;}
+    .banner .turnplate{display:block;width:90%;position:relative;margin-top: 20%;margin-left: auto;margin-right: auto;}
+    .banner .turnplate canvas.item{width:100%;}
+    .banner .turnplate img.pointer{position:absolute;width:31.5%;height:42.5%;left:34.6%;top:23%;}
+    /*头部样式*/
+    .header{
+        height:2.58rem;
+        background:url(/{{$banner_image}}) no-repeat;
+        background-size: contain;
+    }
+    /*弹出层样式*/
+    .model{
+        display: none;
+        position: fixed;
+        top:0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+    }
+    .model .close{
+        position: absolute;
+        top:-.5rem;
+        right: .5rem;
+        width:.5rem ;
+        height: .5rem;
+        background: url("{{asset('activity/0001/images/close.png')}}") no-repeat;
+        background-size: contain;
+    }
+    .model_prize .light{
+        display: none;
+        position: absolute;
+        top:-1.7rem;
+        left: 0;
+        width: 7.5rem;
+        height: 7.5rem;
+        background: url("{{asset('activity/0001/images/light.png')}}") no-repeat top center;
+        background-size: contain;
+        animation: myRotate 6s linear infinite;
+    }
+    @keyframes myRotate{
+        0%{
+            transform: rotateZ(0deg);
+        }
+        100%{
+            transform: rotateZ(360deg);
+        }
+    }
+    .model_prize .wrap{
+        background:url("{{asset('activity/0001/images/redpacks.png')}}") no-repeat ;
+        background-size: contain;
+    }
+    .model .hb-template{
+        width: 6rem;
+        height: 7rem;
+        margin: 2rem auto;
+        position: relative;
+    }
+    @media screen and (min-width: 1026px){
+        .model .hb-template{
+            width: 6rem;
+            height: 7rem;
+            margin: .2rem auto;
+            position: relative;
+        }
+    }
+    .hb-template .back{
+        position: absolute;
+        bottom: 0;
+        left: .2rem;
+        width: 5.6rem;
+        height: 4.34rem;
+        background: url("{{asset('activity/0001/images/bg-back.png')}}") no-repeat;
+        background-size: contain;
+    }
+    .hb-template .body{
+        position: absolute;
+        top:.6rem;
+        left:.71rem ;
+        width: 4.58rem;
+        height: 3.53rem;
+        background: url("{{asset('activity/0001/images/body.png')}}") no-repeat;
+        background-size: contain;
+    }
+    .hb-template .body img{
+        position: absolute;
+        bottom: .4rem;
+        left: .1rem;
+        width: 4.4rem;
+        height: 2rem;
+    }
+    .hb-template .front{
+        position: absolute;
+        bottom:0;
+        left:.2rem ;
+        width: 5.60rem;
+        height: 3.84rem;
+        background: url("{{asset('activity/0001/images/bg-front-low.png')}}") no-repeat;
+        background-size: contain;
+    }
+    .hb-template .front .p1{
+        font-size: .4rem;
+        text-align: center;
+        color: #ffbf13;
+        margin-top: .6rem;
+    }
+    .hb-template .front .prize{
+        font-size: .6rem;
+        text-align: center;
+        color: #fff;
+        margin-top: .1rem;
+    }
+    .hb-template .front .btn{
+        display: block;
+        line-height:.8rem;
+        font-size: .5rem;
+        text-align: center;
+        width:5.06rem ;
+        height: 1.02rem;
+        background: url("{{asset('activity/0001/images/button.png')}}") no-repeat;
+        background-size: contain;
+        margin: .4rem auto;
+    }
+    /*规则*/
+    .rule_btn{
+        position: absolute;
+        top:0;
+        left: .2rem;
+        width:.6rem ;
+        height: .7rem;
+        background: url("{{asset('activity/0001/images/rule.png')}}") no-repeat;
+        background-size: contain;
+    }
+    .model_rule{
+        display: none;
+    }
+    .rule-modal-dialog{
+        position: relative;
+        background: #ffbf13;
+        margin: 30% auto;
+        border-radius: .2rem;
+        overflow: hidden;
+        width: 5.6rem;
+        height: 6.6rem;
+        padding: .2rem .2rem;
+        -webkit-box-sizing: padding-box;
+        -moz-box-sizing: padding-box;
+        box-sizing: padding-box;
+        color: #fff;
+    }
+    @media screen and (min-width: 1025px){
+        .rule-modal-dialog{
+            margin: 0 auto;
+        }
+    }
+    .rule-modal-dialog header{
+        font-size: .3rem;
+        color: #fff;
+        line-height:.3rem;
+        text-align: center;
+        margin-bottom: .25rem;
+    }
+    .rule-modal-dialog header i{
+        display: inline-block;
+        width: .15rem;
+        height: .15rem;
+        background: #fff;
+        border-radius: 50%;
+        margin: 0 .1rem;
+    }
+    .rule-modal-dialog .close{
+        position: absolute;
+        top: .24rem;
+        right: .24rem;
+        width: .30rem;
+        height: .30rem;
+        cursor: pointer;
+        text-align: center;
+        font-size: .30rem;
+    }
+    .scroll-box{
+        width: 100%;
+        height: 5.5rem;
+        overflow: auto;
+    }
+    .rule-modal .iScrollVerticalScrollbar {
+        right: 0!important;
+        width: .1rem!important;}
+    .rule-modal-dialog p{
+        margin-bottom: .1rem;
+        font-size: .2rem;
+    }
+    .probability .nav{
+        background: #ff9000;
+        text-align: center;
+        line-height: .4rem;
+        font-size: .2rem;
+    }
+    .probability .nav i{
+        display: inline-block;
+        width: .12rem;
+        height: .12rem;
+        transition: all .3s ease-in-out;
+        -webkit-transform: rotate(-135deg);
+        transform: rotate(-135deg);
+        -webkit-transform-origin: .03rem .03rem;
+        transform-origin: .03rem .03rem;
+        vertical-align: -.04rem;
+        border: .01rem solid transparent;
+        border-top-color: #f7d1a5;
+        border-left-color: #f7d1a5;
+        margin: 0 .1rem;
+    }
+    .probability .nav i{
+        border-top-color: #fff;
+        border-left-color: #fff;
+    }
+    .probability .text{
+        display: none;
+    }
+    /*我的奖品*/
+    .myprize_btn{
+        position: absolute;
+        top:0;
+        right: .2rem;
+        width:.6rem ;
+        height: .7rem;
+        background: url("{{asset('activity/0001/images/prize.png')}}") no-repeat;
+        background-size: contain;
+    }
+</style>
+@stop

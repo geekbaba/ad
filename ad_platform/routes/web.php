@@ -91,6 +91,9 @@ Route::group(['middleware' => 'web'], function ($router) {
     $router->group(['prefix'=>'statistics'],function($router){
         $router->get('/show_hour', ['uses' => 'StatisticsController@showHourStatisticsList']);
         $router->get('/show_day',  ['uses' => 'StatisticsController@showDayStatisticsList']);
+
+        $router->get('/click_hour', ['uses' => 'StatisticsController@clickHourStatisticsList']);
+        $router->get('/click_day',  ['uses' => 'StatisticsController@clickDayStatisticsList']);
     });
 
 

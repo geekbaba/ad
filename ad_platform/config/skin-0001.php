@@ -17,8 +17,8 @@ return [
                 ,'display_name'=>'主背景图片'
                 ,'mime'=>MIMEType::IMAGE
                 ,'maxSize'=>'2M'
-                ,'width'=>750
-                ,'height'=>1206
+                ,'width'=>640
+                ,'height'=>1008
             ]
             ,'banner_image'=>[
                 'type'=>FrontWidgetType::IMAGE
@@ -28,14 +28,6 @@ return [
                 ,'maxSize'=>'2M'
                 ,'width'=>750
                 ,'height'=>258
-            ]
-            ,'bg'=>[
-                'type'=>FrontWidgetType::IMAGE
-                ,'name'=>'bg'
-                ,'display_name'=>'BG图片'
-                ,'mime'=>MIMEType::IMAGE
-                ,'maxSize'=>'2M'
-                
             ]
         ]
 ];

@@ -12,7 +12,7 @@ class Render{
         
     }
     
-    static function  render($activity){
+    static function  render($activity,$skin){
         
         ;
         
@@ -25,7 +25,7 @@ class Render{
                 break;
         }
         
-        return self::$renderEngine::render($activity);
+        return self::$renderEngine->render($activity,$skin);
     }
     
     

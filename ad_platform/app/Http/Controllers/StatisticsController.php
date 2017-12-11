@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Model\ActivityProduct;
 use App\Model\Advertising;
 use App\Model\AdvertisingSpace;
+use App\Model\ShortUrl;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Model\Activity;
@@ -158,22 +159,55 @@ class StatisticsController extends WithAuthController
     }
 
 
-    public function clickHourStatisticsList($type='CLICK'){
-
+    public function clickHourStatisticsList(Request $request){
+        $all = $request->all();
+        $type = $all['type'];
         $list = DB::table('ad_click_statistics')->where('log_type',$type)->orderBy('created_at')->paginate(5);
 
+        $title = '短链接点击';
 
+        $ShortUrlModel = new ShortUrl();
 
-        return view('statist/click_day_list', ['list' => $list]);
+        $shorturls = [];
+
+        foreach ($list as $item){
+
+            $shorturls[] = $item->shorturl;
+        }
+
+        $namelist = $ShortUrlModel->whereIn('shorturl',$shorturls)->get();
+        $nameMap = [];
+        foreach ($namelist as $item){
+            $nameMap[$item->shorturl] = $item->original_url;
+        }
+        return view('statist/click_hour_list', ['list' => $list,'title'=>$title,'namemap'=>$nameMap]);
 
     }
-    public function clickDayStatisticsList($type='CLICK'){
-
+    public function clickDayStatisticsList(Request $request){
+        $all = $request->all();
+        $type = $all['type'];
         $list = DB::table('ad_click_statistics')->where('log_type',$type)
-            ->select(DB::raw('sum(count) as count'),DB::raw('sum(cheat_count) as cheat_count'),'request_day','shorturl')->orderBy('created_at')->paginate(5);
+            ->groupBy('request_day','shorturl')
+            ->select(DB::raw('sum(count) as count'),DB::raw('sum(cheat_count) as cheat_count'),'request_day','shorturl')->paginate(5);
 
+        $title = '短链接点击';
 
-        return view('statist/click_day_list', ['list' => $list]);
+        $ShortUrlModel = new ShortUrl();
+
+        $shorturls = [];
+
+        foreach ($list as $item){
+
+            $shorturls[] = $item->shorturl;
+        }
+
+        $namelist = $ShortUrlModel->whereIn('shorturl',$shorturls)->get();
+        $nameMap = [];
+        foreach ($namelist as $item){
+            $nameMap[$item->shorturl] = $item->original_url;
+        }
+
+        return view('statist/click_day_list', ['list' => $list,'title'=>$title,'namemap'=>$nameMap]);
 
     }
 

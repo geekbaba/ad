@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\ActivitySkin;
 use Illuminate\Http\Request;
 use App\Libraries\AdSelector\Selector;
 use App\Libraries\ProductSelector\Selector as ProductSelector;
@@ -90,8 +91,24 @@ class RequestController extends Controller
         
         $ActivityModel = new Activity();
         $activity = $ActivityModel->where('activity_id',$activity_id)->first();
-        
-        $render = ActivityRender::render($activity);
+
+        $ActivitySkinModel = new ActivitySkin();
+
+        $skins = $ActivitySkinModel->where('activity_id',$activity_id)->get();
+
+        //activity_skin_attribute
+        $count = $skins->count();
+
+        $i = (int) rand(0,$count);
+
+        foreach ($skins as $index=>$skin){
+            if($index==$i){
+                break;
+            }
+        }
+
+
+        $render = ActivityRender::render($activity,$skin);
         
         $log_type = 'ACTIVITY_SHOW';
         
@@ -112,7 +129,7 @@ class RequestController extends Controller
         
         //
         $this->make($request,$log_type,$activity_id,$slot,$pos,$otherinfo);
-        
+        //dump($render);
         return response()->view($render['template'],$render['data']);
         
     }
