@@ -21,7 +21,7 @@ class Render{
                 self::$renderEngine = new WheelOfFortuneRender();
                 break;
             case '0002':
-                self::$renderEngine = new WheelOfFortuneRender();
+                self::$renderEngine = new ScratcCardRender();
                 break;
         }
         

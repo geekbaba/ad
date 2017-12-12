@@ -107,7 +107,6 @@ class RequestController extends Controller
             }
         }
 
-
         $render = ActivityRender::render($activity,$skin);
         
         $log_type = 'ACTIVITY_SHOW';
