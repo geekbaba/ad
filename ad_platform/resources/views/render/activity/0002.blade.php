@@ -21,7 +21,7 @@
     <img src="{{asset('activity/0002/images/cover.png')}}" alt="" id="imgCover" style="display: none;">
     <div class="wrap">
         <div class="rule_btn"></div>
-        <a class="myprize_btn" href="./myPrize.html"></a>
+        <a class="myprize_btn" href="/myprice/"></a>
         <div class="head">
             <div class="can_container">
                 <div id="can_con">

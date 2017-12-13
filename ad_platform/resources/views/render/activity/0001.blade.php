@@ -17,7 +17,7 @@
 <img src="{{asset('activity/0001/images/hbsmile.png')}}" id="img-smile" style="display:none;"/>
 <div class="wrap">
     <a class="rule_btn" href="javascript:void(0);"></a>
-    <a class="myprize_btn" href="./myPrize.html"></a>
+    <a class="myprize_btn" href="/myprice/"></a>
     <div class="banner">
         <div class="header">
 

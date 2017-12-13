@@ -27,6 +27,7 @@ Route::get('/test', ['uses' => 'TestController@index']);
 Route::get('/attach/{hash_key}', ['uses' => 'AttachController@attach']);
 Route::get('/[Attach]:{hash_key}', ['uses' => 'AttachController@attach']);
 Route::get('/renderjs/{slot}', ['uses' => 'RenderjsController@index']);
+Route::get('/myprice/', ['uses' => 'RequestController@myProduct']);
 Route::get('/activityjs/{activity_id}/js', ['uses' => 'RenderjsController@activityJs'])->where('activity_id', '[0-9]+');
 
 Route::group(['middleware' => 'web'], function ($router) {

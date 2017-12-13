@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\ActivityProduct;
 use App\Model\ActivitySkin;
+use App\Model\CookiesProduct;
 use Illuminate\Http\Request;
 use App\Libraries\AdSelector\Selector;
 use App\Libraries\ProductSelector\Selector as ProductSelector;
@@ -165,6 +167,21 @@ class RequestController extends Controller
             $otherinfo = 'EXIST_COOKIE:'.$cookies['uuid'];
             $otherinfo .= ',activity_id:'.$activity_id;
             $slot = Cookie::get('goojo_ad_slot');
+
+            //cookies_product
+            $CookiesProductModel = new CookiesProduct();
+
+            $cookiesproduct = $CookiesProductModel->where('uuid',$cookies['uuid'])->where('activity_product_id',$product->activity_product_id)->first();
+
+            if(!isset($cookiesproduct->activity_product_id)){
+
+                $CookiesProductModel->create([
+                    'cookies_uuid'=>$cookies['uuid']
+                    ,'activity_product_id'=>$product->activity_product_id
+                ]);
+            }
+
+
         }else{
             //非正常请求
             $otherinfo = 'no_info';
@@ -205,6 +222,42 @@ class RequestController extends Controller
         
         return redirect($original_url);
         
+    }
+
+    public function myProduct(Request $request){
+
+        $request->all();
+
+
+
+        $log_type = 'PRODUCT_SHOW';
+
+        $pos='0,0';
+
+        $cookies = $request->cookie();
+
+        if(isset($cookies['uuid'])){
+            $slot = Cookie::get('goojo_ad_slot');
+
+            //cookies_product
+            $CookiesProductModel = new CookiesProduct();
+
+            $activity_product_ids = $CookiesProductModel->where('cookies_uuid',$cookies['uuid'])->pluck('activity_product_id');
+
+            $ActivityProductModel = new ActivityProduct();
+
+            $lists = $ActivityProductModel->whereIn('activity_product_id',$activity_product_ids)->get();
+
+
+        }else{
+
+            $lists = [];
+
+        }
+
+        return response()->view('myproduct' , ['lists'=>$lists]);
+
+
     }
     
     
