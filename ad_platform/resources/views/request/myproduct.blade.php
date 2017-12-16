@@ -15,22 +15,16 @@
         <div class="tel">400-080-6659</div>
     </div>
     <div class="prize_list">
-        <a class="item" href="./prizeDetail.html">
-            <div class="left"><img src="{{asset('activity/0002/images/prize_img.jpg')}}" alt=""></div>
+        @foreach ($lists as $item)
+        <a class="item" href="/product_details/{{$item->activity_product_id}}/">
+            <div class="left"><img src="/{{$item->object->product_list_image}}" alt=""></div>
             <div class="center">
-                <h3>额度10万 随你花</h3>
-                <p>有效期: <span class="time">2017-12-31</span></p>
+                <h3>{{$item->activity_product_name}}</h3>
+                <p>有效期: <span class="time">{{$item->object->validity_date}}</span></p>
             </div>
             <div class="right"><img src="{{asset('activity/0002/images/gt-cart.jpg')}}" alt=""></div>
         </a>
-        <a class="item" href="./prizeDetail.html">
-            <div class="left"><img src="{{asset('activity/0002/images/prize_img.jpg')}}" alt=""></div>
-            <div class="center">
-                <h3>额度10万 随你花</h3>
-                <p>有效期: <span class="time">2017-12-31</span></p>
-            </div>
-            <div class="right"><img src="{{asset('activity/0002/images/gt-cart.jpg')}}" alt=""></div>
-        </a>
+        @endforeach
     </div>
     <p class="footer">已经没有更多了！</p>
 </div>

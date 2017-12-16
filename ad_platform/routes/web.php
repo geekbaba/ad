@@ -23,12 +23,15 @@ Route::get('/gad/{slot}', ['uses' => 'RequestController@selectAd']);
 Route::get('/p/{activity_id}/{slot?}', ['as' => 'p','uses' => 'RequestController@selectProduct'])->where('activity_id', '[0-9]+');
 Route::get('/t/{shorturl}/', ['as' => 't','uses' => 'RequestController@shortUrl']);
 Route::get('/activity/{activity_id}', ['uses' => 'RequestController@showActivity'])->where('activity_id', '[0-9]+');
+Route::get('/product_details/{product_id}', ['uses' => 'RequestController@showProductDetails'])->where('product_id', '[0-9]+');
 Route::get('/test', ['uses' => 'TestController@index']);
 Route::get('/attach/{hash_key}', ['uses' => 'AttachController@attach']);
 Route::get('/[Attach]:{hash_key}', ['uses' => 'AttachController@attach']);
 Route::get('/renderjs/{slot}', ['uses' => 'RenderjsController@index']);
 Route::get('/myprice/', ['uses' => 'RequestController@myProduct']);
+Route::get('/select_activity/', ['uses' => 'RequestController@selectActivity']);
 Route::get('/activityjs/{activity_id}/js', ['uses' => 'RenderjsController@activityJs'])->where('activity_id', '[0-9]+');
+
 
 Route::group(['middleware' => 'web'], function ($router) {
     $router->get('/click', ['uses' => 'ClickController@index']);

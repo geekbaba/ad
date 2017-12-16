@@ -248,6 +248,10 @@ class RequestController extends Controller
 
             $lists = $ActivityProductModel->whereIn('activity_product_id',$activity_product_ids)->get();
 
+            foreach ($lists as &$product){
+
+                $product->object = json_decode($product->activity_product_attribute);
+            }
 
         }else{
 
@@ -255,9 +259,54 @@ class RequestController extends Controller
 
         }
 
-        return response()->view('myproduct' , ['lists'=>$lists]);
+        return response()->view('request.myproduct' , ['lists'=>$lists]);
 
 
+    }
+
+
+    public function showProductDetails(Request $request,$product_id){
+
+        $ActivityProductModel = new ActivityProduct();
+
+        $product = $ActivityProductModel->where('activity_product_id',$product_id)->first();
+
+        $product->object = json_decode($product->activity_product_attribute);
+
+        $time = strtotime($product->object->validity_date);
+
+        $limit = $time - time();
+        if($limit>0){
+            $limit_day = (int)$limit/86400;
+            $limit_day = sprintf("仅剩%d天",$limit_day);
+        }else{
+            $limit_day = '已过期';
+        }
+        return response()->view('request.product_detail' , ['limit_day'=>$limit_day,'product'=>$product]);
+
+    }
+
+
+
+    //选择产品
+    public function selectActivity(Request $request){
+
+        $request->all();
+
+        $request_information = $this->getRequestInformation($request);
+
+        $ActivityModel = new Activity();
+        $activitys = $ActivityModel->where('status','1')->get();
+        $count = $activitys->count();
+        $selected = (int) rand(0,$count) - 1;
+        foreach ($activitys as $index => $activity){
+            if($index == $selected){
+
+                break;
+            }
+        }
+
+        return redirect("/activity/".$activity->activity_id);
     }
     
     
