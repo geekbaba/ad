@@ -171,7 +171,7 @@ class RequestController extends Controller
             //cookies_product
             $CookiesProductModel = new CookiesProduct();
 
-            $cookiesproduct = $CookiesProductModel->where('uuid',$cookies['uuid'])->where('activity_product_id',$product->activity_product_id)->first();
+            $cookiesproduct = $CookiesProductModel->where('cookies_uuid',$cookies['uuid'])->where('activity_product_id',$product->activity_product_id)->first();
 
             if(!isset($cookiesproduct->activity_product_id)){
 

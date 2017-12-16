@@ -5,7 +5,6 @@
 <script type="text/javascript" src="{{asset('activity/0002/js/jquery.1.11.1.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('activity/0002/js/swiper.min.js')}}"></script>
 
-<script type="text/javascript" src="/activityjs/1/js"></script>
 
 
 <script type="text/javascript" src="{{asset('activity/0002/js/index.js')}}"></script>
@@ -114,8 +113,8 @@
                 </div>
                 <div class="front">
                     <p class="p1">恭喜获得</p>
-                    <p class="prize">888</p>
-                    <a href="javascript:void(0);" class="btn">立即领取</a>
+                    <p class="prize"></p>
+                    <a id="get_now" href="#" style="color: #e22820;" class="btn">立即领取</a>
                 </div>
             </div>
         </div>
@@ -125,7 +124,7 @@
         var canCon = document.getElementById('can_con');
         var oCan = document.getElementById('can');//获取画布
         var i = Math.round(Math.random()*3);//获取0-3的随机整数
-        canCon.style.background = 'url(./images/'+i+'.jpg) no-repeat center';
+        canCon.style.background = 'url(/activity/0002/images/'+i+'.jpg) no-repeat center';
         var oGc = oCan.getContext('2d');
         /* 画布偏移量，下面用到的时候再介绍*/
         var arr = getOffset(oCan);

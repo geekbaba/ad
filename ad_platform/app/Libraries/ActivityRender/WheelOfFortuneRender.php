@@ -17,6 +17,9 @@ class WheelOfFortuneRender extends ActivityRenderInterface{
         $skin_attribute = json_decode($skin->activity_skin_attribute);
 
         $main_background_image = $skin_attribute->main_background_image;
+
+        $bg_color = $skin_attribute->bg_color;
+
         if(isset($skin_attribute->banner_image)){
             $banner_image = $skin_attribute->banner_image;
         }else{
@@ -29,6 +32,7 @@ class WheelOfFortuneRender extends ActivityRenderInterface{
                 'title'=>$activity->activity_name
                 ,'main_background_image'=>$main_background_image
                 ,'banner_image'=>$banner_image
+                ,'bg_color'=>$bg_color
             ]
         ];
     }

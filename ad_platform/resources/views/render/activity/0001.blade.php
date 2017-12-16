@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-<body style="background:#bb2e30;overflow-x:hidden;">
+<body>
 <!--奖项图片-->
 <img src="{{asset('activity/0001/images/hb80.png')}}" id="img-80" style="display:none;"/>
 <img src="{{asset('activity/0001/images/hb88.png')}}" id="img-88" style="display:none;"/>
@@ -22,7 +22,9 @@
         <div class="header">
 
         </div>
-        <div class="turnplate" style="background-image:url(/{{$main_background_image}});background-size:100% 100%;">
+        <div class="turnplate">
+            <div class="rotate"></div>
+            <div class="rotate1" style="display: block;"></div>
             <canvas class="item" id="wheelcanvas" width="422px" height="422px"></canvas>
             <img class="pointer" src="{{asset('activity/0001/images/turnplate-pointer.png')}}"/>
         </div>
@@ -78,25 +80,32 @@
     <div class="wrap" style="transform:scale(.1)">
         <div class="light">
         </div>
-            <div class="close"></div>
-            <div class="hb-template">
-                <div class="back"></div>
-                <div class="body">
-                    <!--奖品图片-->
-                    <img  src="" alt="">
-                </div>
-                <div class="front">
-                    <p class="p1">恭喜获得</p>
-                    <p class="prize"></p>
-                    <a id="get_now" href="#" class="btn">立即领取</a>
-                </div>
+        <div class="close"></div>
+        <div class="hb-template">
+            <div class="back"></div>
+            <div class="body">
+                <!--奖品图片-->
+                <img src="" alt="">
+            </div>
+            <div class="front">
+                <p class="p1">恭喜获得</p>
+                <p class="prize"></p>
+                <a id="get_now" href="#" style="color: #e22820;" class="btn">立即领取</a>
             </div>
         </div>
+    </div>
 </div>
 @stop
 
-
 @section('css')
+<script>
+    setInterval(function () {
+        $('.turnplate .rotate1').css('display','block');
+        setTimeout(function () {
+            $('.turnplate .rotate1').css('display','none');
+        },600)
+    },1200);
+</script>
 <style>
     body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div{margin:0;padding:0;border:0;}
     body{color:#333; font-size:12px;font-family:"Microsoft YaHei"}
@@ -107,18 +116,36 @@
     a:hover{color:#c00; text-decoration:none;}
     .clear{clear:both;}
     .wrap{
-        width: 7.5rem;
+        width: 6.4rem;
         margin: 0 auto;
         position: relative;
     }
+    body{
+        background-color: {{$bg_color}};
+    }
     /* 大转盘样式 */
-    .banner{display:block;width:100%;height:12.06rem;margin-left:auto;margin-right:auto;margin-bottom: 20px;background: url("{{asset('activity/0001/images/bg.jpg')}}")no-repeat;background-size: contain;overflow: hidden;}
+    .banner{display:block;width:100%;height:10.08rem;margin-left:auto;margin-right:auto;background: url("/{{$main_background_image}}")no-repeat;background-size: contain;overflow: hidden;}
     .banner .turnplate{display:block;width:90%;position:relative;margin-top: 20%;margin-left: auto;margin-right: auto;}
+    .banner .turnplate .rotate{
+        position: absolute;top: 0;left: 0;width: 100%;height: 100%;background-image:url("{{asset('activity/0001/images/annulus.png')}}");background-size:100% 100%;/*animation: move .7s .7s infinite alternate;*/
+    }
+    .banner .turnplate .rotate1{
+        position: absolute;top: 0;left: 0;width: 100%;height: 100%;background-image:url("{{asset('activity/0001/images/annulus.png')}}");background-size:100% 100%;transform: rotate(10deg);/*animation: move .7s infinite alternate;*/
+    }
+    @keyframes move {
+        0%{
+        display: block;
+        }
+        100%{
+        display: none;
+        }
+    }
     .banner .turnplate canvas.item{width:100%;}
-    .banner .turnplate img.pointer{position:absolute;width:31.5%;height:42.5%;left:34.6%;top:23%;}
+    .banner .turnplate img.pointer{position:absolute;width:32.1%;height:42.6%;left:34%;top:23%;}
+
     /*头部样式*/
     .header{
-        height:2.58rem;
+        height:2.3rem;
         background:url(/{{$banner_image}}) no-repeat;
         background-size: contain;
     }
@@ -199,8 +226,8 @@
     .hb-template .body img{
         position: absolute;
         bottom: .4rem;
-        left: .1rem;
-        width: 4.4rem;
+        left: .2rem;
+        width: 92%;
         height: 2rem;
     }
     .hb-template .front{

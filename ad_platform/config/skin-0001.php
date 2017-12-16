@@ -26,8 +26,13 @@ return [
                 ,'display_name'=>'banner图片'
                 ,'mime'=>MIMEType::IMAGE
                 ,'maxSize'=>'2M'
-                ,'width'=>750
-                ,'height'=>258
+                ,'width'=>640
+                ,'height'=>230
+            ]
+            ,'bg_color'=>[
+                'type'=>FrontWidgetType::TEXT
+                ,'name'=>'bg_color'
+                ,'display_name'=>'背景色码值'
             ]
         ]
 ];
