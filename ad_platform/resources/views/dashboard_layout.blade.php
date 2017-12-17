@@ -164,6 +164,16 @@
                                 <a class="nav-link" href="/statistics/show_hour?type=PRODUCT_SHOW">&nbsp;&nbsp;&nbsp;<i class="icon-puzzle"></i>产品展示报表-小时</a>
                             </li> <!-- -->
                             <li class="nav-item">
+                                <a class="nav-link" href="/statistics/show_day?type=QUERY_AD">&nbsp;&nbsp;&nbsp;<i class="icon-puzzle"></i>广告展示报表-天</a>
+                            </li> <!-- --><li class="nav-item">
+                                <a class="nav-link" href="/statistics/show_hour?type=QUERY_AD">&nbsp;&nbsp;&nbsp;<i class="icon-puzzle"></i>广告展示报表-小时</a>
+                            </li> <!-- -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="/statistics/show_day?type=ADS_REQ">&nbsp;&nbsp;&nbsp;<i class="icon-puzzle"></i>广告位展示报表-天</a>
+                            </li> <!-- --><li class="nav-item">
+                                <a class="nav-link" href="/statistics/show_hour?type=ADS_REQ">&nbsp;&nbsp;&nbsp;<i class="icon-puzzle"></i>广告位展示报表-小时</a>
+                            </li> <!-- -->
+                            <li class="nav-item">
                                 <a class="nav-link" href="/statistics/click_day?type=CLICK">&nbsp;&nbsp;&nbsp;<i class="icon-puzzle"></i>点击报表-天</a>
                             </li> <!-- --><li class="nav-item">
                                 <a class="nav-link" href="/statistics/click_hour?type=CLICK">&nbsp;&nbsp;&nbsp;<i class="icon-puzzle"></i>点击报表-小时</a>
