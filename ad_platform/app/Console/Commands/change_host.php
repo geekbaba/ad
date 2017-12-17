@@ -41,13 +41,14 @@ class change_host extends Command
      */
     public function handle()
     {
+        /**
         $search_host = '192.168.10.125';
         $replace_host = '192.168.21.90';
+         */
 
-        /**
-            $search_host = '192.168.21.90';
-            $replace_host = '192.168.10.125';
-        */
+        $search_host = '192.168.21.90';
+        $replace_host = '192.168.10.125';
+
         //
         $config_path = config_path();
 

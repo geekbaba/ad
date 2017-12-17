@@ -46,12 +46,15 @@ $(document).ready(function(){
     img.src = '{{asset('activity/0002/images/cover.png')}}';
     /*var img = document.getElementsByTagName('imgCover');*/
     //创建一个图案对象
-    var pat=oGc.createPattern(img,"repeat");
-    oGc.beginPath();
-    oGc.fillStyle = pat;
-    oGc.fillRect(0,0,300,200);
-    oGc.closePath();
-    /* 增加触摸监听*/
+    img.onload = function(){
+        var pat=oGc.createPattern(img,"repeat");
+        oGc.beginPath();
+        oGc.fillStyle = pat;
+        oGc.fillRect(0,0,300,200);
+        oGc.closePath();
+        /* 增加触摸监听*/
+    };
+
     oCan.addEventListener("touchstart",fn1,false);
 
     function fn1(){
