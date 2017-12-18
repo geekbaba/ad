@@ -53,17 +53,6 @@ class change_host extends Command
         $replace_host = '192.168.1.109';
 
         //
-        $config_path = config_path();
-
-        $services_config_file = $config_path.DIRECTORY_SEPARATOR."services.php";
-
-        $contents = file_get_contents($services_config_file);
-
-        $new_contents = str_replace($search_host,$replace_host,$contents);
-
-        file_put_contents($services_config_file,$new_contents);
-
-
 
 
         $ActivityProductModel = new ActivityProduct();
