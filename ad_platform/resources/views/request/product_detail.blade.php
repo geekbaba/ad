@@ -17,11 +17,11 @@
         </div>
         <div class="content">
             <h3>图文详情：</h3>
-            <p>{!!$product->object->description!!}</p>
+            <p>@if(isset($product->object->description)) {!!$product->object->description!!} @endif</p>
             <h3>使用流程</h3>
-            <p>{!!$product->object->user_manual!!}</p>
+            <p>@if(isset($product->object->user_manual)) {!!$product->object->user_manual!!} @endif</p>
             <h3>使用规则</h3>
-            <p>{!!$product->object->rules!!}</p>
+            <p>@if(isset($product->object->rules)) {!!$product->object->rules!!} @endif</p>
         </div>
         <div class="footer">
             <p>客服热线：400-000-0000</p>
