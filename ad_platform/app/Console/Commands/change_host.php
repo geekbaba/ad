@@ -7,6 +7,7 @@ use App\Model\Advertising;
 use App\Model\AdvertisingSpace;
 use App\Model\ShortUrl;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Config;
 
 class change_host extends Command
 {
@@ -46,8 +47,10 @@ class change_host extends Command
         $replace_host = '192.168.21.90';
          */
 
-        $search_host = '192.168.21.90';
-        $replace_host = '192.168.10.125';
+        $search_host = Config::get("services.server_host.adserver");
+        //$search_host = '192.168.21.90';
+        //$search_host = '192.168.10.125';
+        $replace_host = '192.168.1.109';
 
         //
         $config_path = config_path();

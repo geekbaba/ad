@@ -202,7 +202,8 @@ WidgetBuilder = (function() {
 			html.push('<div class="form-group row '+ oThis.widgetStyleClass +'">');
 			html.push('<label class="col-md-3 form-control-label" for="file_'+ item.name +'">'+ item.display_name +'</label>');
 			html.push('<div class="col-md-9">');
-			html.push('<img style="width:50px;height:50px;" id="file_'+ item.name +'" src="/' + value + '" />');
+            html.push('<input name="'+ oThis.namePrefix +'['+ item.name +']" type="hidden" value="'+value+'" />');
+            html.push('<img style="width:50px;height:50px;" id="file_'+ item.name +'" src="/' + value + '" />');
 			html.push('</div>');
 			html.push('</div>');
 		}else{

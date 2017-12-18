@@ -33,7 +33,19 @@ return [
         ,'description'=>[
             'type'=>FrontWidgetType::TEXT_AREA
             ,'name'=>'description'
-            ,'display_name'=>'描述'
+            ,'display_name'=>'图文详情'
+            ,'maxSize'=>'2M'
+        ]
+        ,'user_manual'=>[
+            'type'=>FrontWidgetType::TEXT_AREA
+            ,'name'=>'user_manual'
+            ,'display_name'=>'使用流程'
+            ,'maxSize'=>'2M'
+        ]
+        ,'rules'=>[
+            'type'=>FrontWidgetType::TEXT_AREA
+            ,'name'=>'rules'
+            ,'display_name'=>'使用规则'
             ,'maxSize'=>'2M'
         ]
         ,'button_name'=>[
