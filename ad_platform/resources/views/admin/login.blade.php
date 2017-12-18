@@ -28,7 +28,7 @@
                     	<form class="login-form" action="/login/post" method="post">
                         <div class="card-block">
                         	{{ csrf_field() }}
-                        	<h1>Login</h1>
+                        	<h1>请登录</h1>
                         	@if (session('msg'))
 					       	<p class="text-muted">{{session('msg')}}</p>
 					        @else

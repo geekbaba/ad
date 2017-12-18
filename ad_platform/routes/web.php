@@ -18,6 +18,7 @@
 Route::get('/',['uses' => 'HomeController@index']);
 
 Route::get('/login',  ['uses' => 'LoginController@index'])->name('login');
+Route::get('/logout', 'LoginController@logout');
 
 Route::get('/gad/{slot}', ['uses' => 'RequestController@selectAd']);
 Route::get('/p/{activity_id}/{slot?}', ['as' => 'p','uses' => 'RequestController@selectProduct'])->where('activity_id', '[0-9]+');

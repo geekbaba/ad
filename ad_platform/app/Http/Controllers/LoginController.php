@@ -12,6 +12,11 @@ class LoginController extends Controller
     {
         return view('admin/login');
     }
+
+    public function logout(){
+        Auth::logout();
+        return redirect('login');
+    }
     
     public function postLogin(Request $request){
         
@@ -30,4 +35,5 @@ class LoginController extends Controller
         return redirect('login')->withInput($request->except('password'))->with('msg', '用户名或密码错误');
         
     }
+
 }
